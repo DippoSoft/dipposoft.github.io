@@ -20,25 +20,25 @@
 
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --primary-light: #3b82f6;
-      --secondary: #7c3aed;
-      --accent: #06b6d4;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --dark: #0f172a;
-      --dark-lighter: #1e293b;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --gradient-primary: linear-gradient(135deg,
-          #2563eb 0%,
-          #7c3aed 50%,
-          #06b6d4 100%);
-      --gradient-dark: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --secondary: #a855f7;
+      --accent: #22d3ee;
+      --accent-warm: #f472b6;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --dark: #030712;
+      --dark-card: #111827;
+      --dark-lighter: #1f2937;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #22d3ee 100%);
+      --gradient-warm: linear-gradient(135deg, #f472b6 0%, #a855f7 100%);
+      --radius: 20px;
     }
 
     * {
@@ -59,101 +59,68 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background */
-    .bg-animation {
+    /* ===== MESH GRADIENT BG ===== */
+    .mesh-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: var(--gradient-dark);
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 90%, rgba(99, 102, 241, .18), transparent),
+        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(168, 85, 247, .15), transparent),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(34, 211, 238, .08), transparent),
+        var(--dark);
     }
 
-    .bg-animation::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 20% 80%,
-          rgba(37, 99, 235, 0.15) 0%,
-          transparent 50%),
-        radial-gradient(circle at 80% 20%,
-          rgba(124, 58, 237, 0.15) 0%,
-          transparent 50%),
-        radial-gradient(circle at 40% 40%,
-          rgba(6, 182, 212, 0.1) 0%,
-          transparent 40%);
-      animation: bgFloat 20s ease-in-out infinite;
-    }
-
-    @keyframes bgFloat {
-
-      0%,
-      100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-
-      25% {
-        transform: translate(-5%, 5%) rotate(5deg);
-      }
-
-      50% {
-        transform: translate(5%, -5%) rotate(-5deg);
-      }
-
-      75% {
-        transform: translate(-3%, 3%) rotate(3deg);
-      }
-    }
-
-    /* Floating Particles */
-    .particles {
+    /* ===== AURORA GLOW ===== */
+    .aurora {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+      inset: 0;
       z-index: -1;
       pointer-events: none;
+      overflow: hidden;
     }
 
-    .particle {
+    .aurora span {
       position: absolute;
-      width: 6px;
-      height: 6px;
-      background: var(--primary-light);
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
-      opacity: 0.3;
-      animation: particleFloat 15s infinite ease-in-out;
+      filter: blur(120px);
+      opacity: .12;
+      animation: auroraMove 18s ease-in-out infinite alternate;
     }
 
-    @keyframes particleFloat {
+    .aurora span:nth-child(1) {
+      background: #6366f1;
+      top: -10%;
+      left: 10%;
+    }
 
-      0%,
+    .aurora span:nth-child(2) {
+      background: #a855f7;
+      bottom: 10%;
+      right: -5%;
+      animation-delay: 6s;
+    }
+
+    .aurora span:nth-child(3) {
+      background: #22d3ee;
+      top: 40%;
+      left: 50%;
+      animation-delay: 12s;
+    }
+
+    @keyframes auroraMove {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
       100% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 0.3;
-      }
-
-      90% {
-        opacity: 0.3;
-      }
-
-      100% {
-        transform: translateY(-100vh) rotate(720deg);
-        opacity: 0;
+        transform: translate(80px, -60px) scale(1.3);
       }
     }
 
-    /* Header Navigation */
+    /* ===== HEADER ===== */
     header {
       position: fixed;
       top: 0;
@@ -161,19 +128,19 @@
       right: 0;
       z-index: 1000;
       padding: 1rem 2rem;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(3, 7, 18, .6);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
-      transition: all 0.3s ease;
+      transition: all .35s ease;
     }
 
     header.scrolled {
-      padding: 0.5rem 2rem;
-      background: rgba(15, 23, 42, 0.95);
+      padding: .6rem 2rem;
+      background: rgba(3, 7, 18, .92);
     }
 
     nav {
-      max-width: 1400px;
+      max-width: 1300px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -183,30 +150,29 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
     }
 
     .logo img {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 0 20px rgba(99, 102, 241, .5);
     }
 
     .logo-text {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 900;
       background: var(--gradient-primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.5px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.8rem;
       list-style: none;
     }
 
@@ -214,21 +180,21 @@
       color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
+      font-size: .92rem;
+      transition: color .3s;
       position: relative;
-      padding: 0.5rem 0;
+      padding: .5rem 0;
     }
 
     .nav-links a::after {
       content: "";
       position: absolute;
       bottom: 0;
-      left: 0;
+      right: 0;
       width: 0;
       height: 2px;
       background: var(--gradient-primary);
-      transition: width 0.3s ease;
+      transition: width .3s;
     }
 
     .nav-links a:hover {
@@ -239,18 +205,76 @@
       width: 100%;
     }
 
-    /* Hero Section */
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, .97);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color .3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    /* ===== HERO ===== */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px 2rem 60px;
+      padding: 120px 2rem 80px;
       position: relative;
     }
 
     .hero-content {
-      max-width: 1400px;
+      max-width: 1300px;
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -259,18 +283,18 @@
     }
 
     .hero-text {
-      animation: fadeInRight 1s ease-out;
+      animation: fadeSlideRight .9s ease-out;
     }
 
-    @keyframes fadeInRight {
+    @keyframes fadeSlideRight {
       from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateX(40px)
       }
 
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0)
       }
     }
 
@@ -278,19 +302,18 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
+      padding: 7px 18px;
+      background: rgba(99, 102, 241, .12);
+      border: 1px solid rgba(99, 102, 241, .25);
       border-radius: 50px;
-      font-size: 0.85rem;
-      color: var(--accent);
+      font-size: .82rem;
+      color: var(--primary-light);
       margin-bottom: 1.5rem;
-      backdrop-filter: blur(10px);
     }
 
-    .hero-badge span {
-      width: 8px;
-      height: 8px;
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
       background: var(--success);
       border-radius: 50%;
       animation: pulse 2s infinite;
@@ -301,41 +324,37 @@
       0%,
       100% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1)
       }
 
       50% {
-        opacity: 0.5;
-        transform: scale(1.2);
+        opacity: .5;
+        transform: scale(1.3)
       }
     }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.15;
       margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    .hero h1 .highlight {
+    .hero h1 .grad {
       background: var(--gradient-primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .hero-description {
-      font-size: 1.2rem;
+    .hero-desc {
+      font-size: 1.15rem;
       color: var(--text-secondary);
       margin-bottom: 2rem;
-      max-width: 540px;
+      max-width: 520px;
     }
 
-    .hero-buttons {
+    .hero-btns {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
@@ -344,319 +363,392 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
-      padding: 16px 32px;
-      border-radius: 12px;
+      padding: 15px 30px;
+      border-radius: 14px;
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       border: none;
-      transition: all 0.3s ease;
+      transition: all .35s cubic-bezier(.16, 1, .3, 1);
       position: relative;
       overflow: hidden;
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: white;
-      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn-primary::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent);
-      transition: left 0.5s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(37, 99, 235, 0.5);
-    }
-
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-
-    .btn-secondary {
-      background: var(--glass-bg);
-      color: var(--text-primary);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
     }
 
     .btn svg {
       width: 20px;
       height: 20px;
+      transition: transform .3s;
     }
 
-    /* Hero Image/Preview */
+    .btn:hover svg {
+      transform: translateX(-3px);
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(99, 102, 241, .35);
+    }
+
+    /* Shimmer sweep */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .2) 50%, transparent 100%);
+      animation: btnShimmer 3.5s ease-in-out infinite;
+    }
+
+    @keyframes btnShimmer {
+
+      0%,
+      100% {
+        left: -100%;
+      }
+
+      50% {
+        left: 100%;
+      }
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 44px rgba(99, 102, 241, .5), 0 0 20px rgba(99, 102, 241, .2);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px) scale(.98);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .18);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Visual */
     .hero-visual {
       position: relative;
-      animation: fadeInLeft 1s ease-out 0.3s both;
+      animation: fadeSlideLeft .9s ease-out .2s both;
     }
 
-    @keyframes fadeInLeft {
+    @keyframes fadeSlideLeft {
       from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-40px)
       }
 
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0)
       }
     }
 
-    .hero-preview {
-      position: relative;
-      border-radius: 24px;
+    .mock-window {
+      background: var(--dark-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 0 80px rgba(37, 99, 235, 0.1);
-      background: var(--dark-lighter);
-      padding: 20px;
-      transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-      transition: transform 0.5s ease;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .06);
+      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+      transition: transform .5s;
     }
 
-    .hero-preview:hover {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    .mock-window:hover {
+      transform: perspective(1200px) rotateY(0) rotateX(0);
     }
 
-    .preview-header {
+    .mock-titlebar {
       display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 7px;
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, .3);
     }
 
-    .preview-dot {
-      width: 12px;
-      height: 12px;
+    .mock-dot {
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
     }
 
-    .preview-dot.red {
+    .mock-dot.r {
       background: #ff5f57;
     }
 
-    .preview-dot.yellow {
+    .mock-dot.y {
       background: #febc2e;
     }
 
-    .preview-dot.green {
+    .mock-dot.g {
       background: #28c840;
     }
 
-    .preview-content {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border-radius: 12px;
-      padding: 24px;
-      min-height: 350px;
+    .mock-body {
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
+      min-height: 340px;
     }
 
-    .preview-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 16px;
+    .mock-row {
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 14px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
     }
 
-    .preview-icon {
+    .mock-icon {
       width: 40px;
       height: 40px;
-      background: var(--gradient-primary);
-      border-radius: 10px;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
-    .preview-stats {
+    .mock-icon.i1 {
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+    }
+
+    .mock-icon.i2 {
+      background: linear-gradient(135deg, #22d3ee, #06b6d4);
+    }
+
+    .mock-icon.i3 {
+      background: linear-gradient(135deg, #a855f7, #9333ea);
+    }
+
+    .mock-label {
+      font-size: .82rem;
+      color: var(--text-secondary);
+    }
+
+    .mock-val {
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .mock-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
-    .preview-stat {
+    .mock-stat {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 14px;
       text-align: center;
     }
 
-    .preview-stat-value {
-      font-size: 1.4rem;
-      font-weight: 700;
+    .mock-stat b {
+      display: block;
+      font-size: 1.3rem;
       color: var(--accent);
     }
 
-    .preview-stat-label {
-      font-size: 0.75rem;
+    .mock-stat small {
+      font-size: .72rem;
       color: var(--text-secondary);
     }
 
-    /* Floating Elements */
-    .floating-element {
+    /* Floating Badges */
+    .fl {
       position: absolute;
-      background: var(--glass-bg);
+      background: var(--dark-card);
       border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      border-radius: 16px;
-      padding: 16px 20px;
+      backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      animation: float 6s ease-in-out infinite;
+      gap: 10px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4);
+      animation: floatY 5s ease-in-out infinite;
     }
 
-    @keyframes float {
+    @keyframes floatY {
 
       0%,
       100% {
-        transform: translateY(0px);
+        transform: translateY(0)
       }
 
       50% {
-        transform: translateY(-20px);
+        transform: translateY(-16px)
       }
     }
 
-    .floating-element.el-1 {
-      top: 0;
-      right: -20px;
-      animation-delay: 0s;
+    .fl.f1 {
+      top: -10px;
+      right: -30px;
     }
 
-    .floating-element.el-2 {
-      bottom: 60px;
+    .fl.f2 {
+      bottom: 50px;
       left: -40px;
       animation-delay: 2s;
     }
 
-    .floating-element.el-3 {
-      bottom: 0;
-      right: 40px;
-      animation-delay: 4s;
-    }
-
-    .floating-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+    .fl-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
 
-    .floating-icon.green {
-      background: rgba(16, 185, 129, 0.2);
+    .fl-icon.green {
+      background: rgba(52, 211, 153, .15);
       color: var(--success);
     }
 
-    .floating-icon.blue {
-      background: rgba(37, 99, 235, 0.2);
-      color: var(--primary-light);
+    .fl-icon.pink {
+      background: rgba(244, 114, 182, .15);
+      color: var(--accent-warm);
     }
 
-    .floating-icon.purple {
-      background: rgba(124, 58, 237, 0.2);
-      color: var(--secondary);
-    }
-
-    .floating-text span {
+    .fl-lbl {
+      font-size: .72rem;
+      color: var(--text-secondary);
       display: block;
     }
 
-    .floating-text .label {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
-
-    .floating-text .value {
-      font-size: 1rem;
+    .fl-val {
       font-weight: 700;
+      font-size: .9rem;
+      display: block;
     }
 
-    /* Features Section */
-    .features {
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: .78rem;
+    }
+
+    .scroll-mouse {
+      width: 24px;
+      height: 38px;
+      border: 2px solid var(--glass-border);
+      border-radius: 14px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 2px;
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: wheelAnim 2s infinite;
+    }
+
+    @keyframes wheelAnim {
+      0% {
+        transform: translate(-50%, 0);
+        opacity: 1
+      }
+
+      100% {
+        transform: translate(-50%, 14px);
+        opacity: 0
+      }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
       padding: 100px 2rem;
       position: relative;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
 
-    .section-badge {
+    .section-tag {
       display: inline-block;
-      padding: 8px 20px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
+      padding: 7px 18px;
+      background: rgba(99, 102, 241, .1);
+      border: 1px solid rgba(99, 102, 241, .2);
       border-radius: 50px;
-      font-size: 0.85rem;
-      color: var(--accent);
+      font-size: .82rem;
+      color: var(--primary-light);
       margin-bottom: 1rem;
     }
 
     .section-title {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: .8rem;
     }
 
-    .section-subtitle {
-      font-size: 1.15rem;
+    .section-sub {
+      font-size: 1.05rem;
       color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
     }
 
+    /* ===== FEATURES ===== */
     .features-grid {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
 
-    .feature-card {
-      background: var(--glass-bg);
+    .f-card {
+      background: var(--dark-card);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
+      border-radius: var(--radius);
       padding: 2rem;
-      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
+      transition: all .45s cubic-bezier(.16, 1, .3, 1);
+      cursor: default;
+      opacity: 0;
+      transform: translateY(30px) scale(.96);
     }
 
-    .feature-card::before {
+    .f-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .f-card::before {
       content: "";
       position: absolute;
       top: 0;
@@ -664,273 +756,1268 @@
       right: 0;
       height: 3px;
       background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .f-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(99, 102, 241, .3);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, .35), 0 0 20px rgba(99, 102, 241, .08);
+    }
+
+    .f-card:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .f-card.featured {
+      border-color: rgba(168, 85, 247, .2);
+      background: linear-gradient(180deg, rgba(168, 85, 247, .06), var(--dark-card));
+    }
+
+    .f-card.featured::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(168, 85, 247, .3), rgba(34, 211, 238, .3), rgba(168, 85, 247, .3));
+      background-size: 300% 300%;
+      z-index: -1;
+      animation: featuredGlow 4s ease-in-out infinite;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity .4s;
     }
 
-    .feature-card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(37, 99, 235, 0.3);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    }
-
-    .feature-card:hover::before {
+    .f-card.featured:hover::after {
       opacity: 1;
     }
 
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gradient-primary);
-      border-radius: 16px;
+    @keyframes featuredGlow {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .f-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-
-    .feature-title {
+      margin-bottom: 1.2rem;
       font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1);
     }
 
-    .feature-description {
+    .f-card:hover .f-icon {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .f-icon.default {
+      background: var(--gradient-primary);
+    }
+
+    .f-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .6rem;
+      transition: color .3s;
+    }
+
+    .f-card:hover .f-title {
+      color: var(--primary-light);
+    }
+
+    .f-desc {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: .9rem;
       line-height: 1.7;
     }
 
-    /* Stats Section */
-    .stats {
-      padding: 80px 2rem;
-      background: linear-gradient(135deg,
-          rgba(37, 99, 235, 0.1) 0%,
-          rgba(124, 58, 237, 0.1) 100%);
+    /* ===== HOW IT WORKS ===== */
+    .steps-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 16px;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, .3);
+    }
+
+    .step-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+
+    .step-info p {
+      color: var(--text-secondary);
+      font-size: .92rem;
+    }
+
+    /* ===== STATS ===== */
+    .stats-section {
+      padding: 70px 2rem;
+      background: linear-gradient(135deg, rgba(99, 102, 241, .08), rgba(168, 85, 247, .08));
       border-top: 1px solid var(--glass-border);
       border-bottom: 1px solid var(--glass-border);
     }
 
-    .stats-container {
-      max-width: 1200px;
+    .stats-grid {
+      max-width: 1100px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
 
-    .stat-item {
+    .stat-box {
       text-align: center;
     }
 
-    .stat-number {
-      font-size: 3rem;
+    .stat-num {
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 900;
       background: var(--gradient-primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
     }
 
-    .stat-label {
+    .stat-lbl {
       color: var(--text-secondary);
-      font-size: 1rem;
+      font-size: .95rem;
+      margin-top: .3rem;
     }
 
-    /* Download Section */
-    .download {
-      padding: 100px 2rem;
-      text-align: center;
-    }
-
-    .download-container {
-      max-width: 800px;
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-track {
+      max-width: 900px;
       margin: 0 auto;
-      background: linear-gradient(135deg,
-          rgba(37, 99, 235, 0.15) 0%,
-          rgba(124, 58, 237, 0.15) 100%);
-      border: 1px solid var(--glass-border);
-      border-radius: 32px;
-      padding: 4rem;
       position: relative;
       overflow: hidden;
     }
 
-    .download-container::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle,
-          rgba(37, 99, 235, 0.1) 0%,
-          transparent 50%);
-      animation: pulse-bg 4s ease-in-out infinite;
+    .t-card {
+      background: var(--dark-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
     }
 
-    @keyframes pulse-bg {
+    .t-stars {
+      color: var(--warning);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 4px;
+    }
+
+    .t-quote {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .t-author {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .t-role {
+      font-size: .82rem;
+      color: var(--text-secondary);
+    }
+
+    .t-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--glass-border);
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .t-dot.active {
+      background: var(--primary);
+      width: 28px;
+      border-radius: 6px;
+    }
+
+    /* ===== DOWNLOAD ===== */
+    .dl-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, .12), rgba(168, 85, 247, .12));
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dl-container::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle, rgba(99, 102, 241, .08), transparent 60%);
+      animation: pulseBg 5s ease-in-out infinite;
+    }
+
+    @keyframes pulseBg {
 
       0%,
       100% {
         transform: scale(1);
-        opacity: 0.5;
+        opacity: .5
       }
 
       50% {
-        transform: scale(1.1);
-        opacity: 0.8;
+        transform: scale(1.15);
+        opacity: .9
       }
     }
 
-    .download-icon {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 2rem;
+    .dl-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 1.5rem;
       background: var(--gradient-primary);
-      border-radius: 28px;
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
-      box-shadow: 0 20px 50px rgba(37, 99, 235, 0.5);
+      font-size: 2.2rem;
+      box-shadow: 0 16px 44px rgba(99, 102, 241, .4);
       position: relative;
       z-index: 1;
     }
 
-    .download h2 {
-      font-size: 2.5rem;
+    .dl-container h2 {
+      font-size: 2.2rem;
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: .8rem;
       position: relative;
       z-index: 1;
     }
 
-    .download p {
+    .dl-container>p {
       color: var(--text-secondary);
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
       position: relative;
       z-index: 1;
     }
 
-    .download-info {
+    .dl-checks {
       display: flex;
       justify-content: center;
-      gap: 3rem;
-      margin-bottom: 2rem;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
       position: relative;
       z-index: 1;
     }
 
-    .download-info-item {
+    .dl-check {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       color: var(--text-secondary);
+      font-size: .9rem;
     }
 
-    .download-info-item svg {
+    .dl-check svg {
       color: var(--success);
+      width: 18px;
+      height: 18px;
     }
 
-    .btn-download {
+    .btn-dl {
       background: var(--gradient-primary);
-      color: white;
-      padding: 20px 48px;
+      color: #fff;
+      padding: 18px 44px;
       border-radius: 16px;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 15px 40px rgba(37, 99, 235, 0.5);
-      transition: all 0.3s ease;
+      gap: 10px;
+      box-shadow: 0 12px 36px rgba(99, 102, 241, .4);
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
       position: relative;
       z-index: 1;
       text-decoration: none;
+      overflow: hidden;
+      animation: dlBreathe 3s ease-in-out infinite;
     }
 
-    .btn-download:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 25px 60px rgba(37, 99, 235, 0.6);
+    @keyframes dlBreathe {
+
+      0%,
+      100% {
+        box-shadow: 0 12px 36px rgba(99, 102, 241, .4);
+      }
+
+      50% {
+        box-shadow: 0 12px 50px rgba(99, 102, 241, .6), 0 0 30px rgba(168, 85, 247, .2);
+      }
     }
 
-    .btn-download svg {
-      width: 24px;
-      height: 24px;
+    /* Shimmer */
+    .btn-dl::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .2) 50%, transparent 100%);
+      animation: btnShimmer 3.5s ease-in-out infinite;
     }
 
-    .version-tag {
+    .btn-dl:hover {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 24px 56px rgba(99, 102, 241, .55), 0 0 30px rgba(99, 102, 241, .2);
+    }
+
+    .btn-dl:active {
+      transform: translateY(-1px) scale(.97);
+    }
+
+    .btn-dl svg {
+      width: 22px;
+      height: 22px;
+      transition: transform .3s;
+    }
+
+    .btn-dl:hover svg {
+      transform: translateY(-2px);
+      animation: dlArrow .6s ease-in-out infinite alternate;
+    }
+
+    @keyframes dlArrow {
+      from {
+        transform: translateY(-2px);
+      }
+
+      to {
+        transform: translateY(3px);
+      }
+    }
+
+    .ver-tag {
       display: inline-block;
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(52, 211, 153, .15);
       color: var(--success);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
-      margin-top: 1.5rem;
+      font-size: .82rem;
+      margin-top: 1.2rem;
       position: relative;
       z-index: 1;
     }
 
-    /* Footer */
-    footer {
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--glass-border);
-      text-align: center;
+    /* ===== COMPATIBILITY WARNING 3D ===== */
+    .compat-warning {
+      max-width: 600px;
+      margin: 2rem auto 0;
+      position: relative;
+      z-index: 1;
+      perspective: 800px;
     }
 
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
+    .compat-card {
+      background: linear-gradient(135deg, rgba(251, 191, 36, .08) 0%, rgba(245, 158, 11, .04) 100%);
+      border: 1px solid rgba(251, 191, 36, .25);
+      border-radius: 18px;
+      padding: 1.4rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      animation: warnEntrance .8s cubic-bezier(.16, 1, .3, 1) both, warnFloat 5s ease-in-out 1s infinite;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      box-shadow:
+        0 8px 32px rgba(251, 191, 36, .12),
+        0 0 0 1px rgba(251, 191, 36, .08),
+        inset 0 1px 0 rgba(255, 255, 255, .06);
     }
 
-    .footer-logo {
+    @keyframes warnEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(20px) rotateX(8deg) scale(.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) scale(1);
+      }
+    }
+
+    @keyframes warnFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px) rotateX(1deg) rotateY(-1deg);
+      }
+    }
+
+    .compat-card:hover {
+      transform: translateY(-4px) scale(1.02) rotateX(2deg) !important;
+      box-shadow:
+        0 16px 48px rgba(251, 191, 36, .2),
+        0 0 30px rgba(251, 191, 36, .08);
+      border-color: rgba(251, 191, 36, .4);
+    }
+
+    /* Shimmer */
+    .compat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, .08), transparent);
+      animation: btnShimmer 4s ease-in-out infinite 1.5s;
+    }
+
+    /* Glow border */
+    .compat-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, .4), rgba(245, 158, 11, .1), rgba(251, 191, 36, .4));
+      background-size: 300% 300%;
+      z-index: -1;
+      animation: warnGlow 3s ease-in-out infinite;
+      opacity: .5;
+    }
+
+    @keyframes warnGlow {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .warn-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, .2), rgba(245, 158, 11, .1));
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+      font-size: 1.6rem;
+      animation: warnIconPulse 2s ease-in-out infinite;
+      box-shadow: 0 4px 16px rgba(251, 191, 36, .15);
     }
 
-    .footer-logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+    @keyframes warnIconPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 4px 16px rgba(251, 191, 36, .15);
+      }
+
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 6px 24px rgba(251, 191, 36, .25);
+      }
     }
 
-    .footer-links {
+    .warn-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .warn-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: .3rem;
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1.5rem;
+      align-items: center;
+      gap: 6px;
     }
 
-    .footer-links a {
+    .warn-title-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .warn-text {
+      font-size: .85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .warn-text strong {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .warn-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(52, 211, 153, .12);
+      color: var(--success);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin-top: .5rem;
+      border: 1px solid rgba(52, 211, 153, .15);
+    }
+
+    .warn-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media(max-width:600px) {
+      .compat-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.2rem;
+      }
+
+      .warn-title {
+        justify-content: center;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-nav a {
       color: var(--text-secondary);
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-size: .9rem;
+      transition: color .3s;
     }
 
-    .footer-links a:hover {
+    .footer-nav a:hover {
       color: var(--text-primary);
     }
 
-    .copyright {
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all .3s;
     }
 
-    .copyright strong {
+    .footer-social a:hover {
+      background: rgba(99, 102, 241, .15);
+      color: var(--primary-light);
+      border-color: rgba(99, 102, 241, .3);
+    }
+
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: .82rem;
+      margin-top: 1rem;
+    }
+
+    .footer-copy strong {
       color: var(--text-primary);
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 1024px) {
+    /* ===== SOCIAL 3D FLOATING ===== */
+    .social-float {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 1500;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 16px;
+      align-items: center;
+      animation: waEntrance 1s cubic-bezier(.16, 1, .3, 1) 2s both;
+    }
+
+    .social-btn-wrap {
+      position: relative;
+    }
+
+    @keyframes waEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(.5) rotateZ(-30deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateZ(0);
+      }
+    }
+
+    .wa-float-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 50%, #075e54 100%);
+      box-shadow:
+        0 6px 20px rgba(37, 211, 102, .45),
+        0 0 40px rgba(37, 211, 102, .2),
+        inset 0 2px 4px rgba(255, 255, 255, .25),
+        inset 0 -2px 4px rgba(0, 0, 0, .15);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      transform-style: preserve-3d;
+      perspective: 600px;
+      animation: waFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes waFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+
+      25% {
+        transform: translateY(-8px) rotateX(3deg) rotateY(-3deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotateX(-2deg) rotateY(4deg);
+      }
+
+      75% {
+        transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+      }
+    }
+
+    .wa-float-link:hover {
+      transform: translateY(-8px) scale(1.12) rotateX(10deg) rotateY(-10deg) !important;
+      box-shadow:
+        0 14px 40px rgba(37, 211, 102, .55),
+        0 0 60px rgba(37, 211, 102, .3),
+        inset 0 2px 4px rgba(255, 255, 255, .3);
+    }
+
+    /* WhatsApp SVG Icon */
+    .wa-float-link svg {
+      width: 34px;
+      height: 34px;
+      fill: #fff;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .2));
+      transition: transform .4s;
+    }
+
+    .wa-float-link:hover svg {
+      transform: scale(1.15) rotate(-8deg);
+    }
+
+    /* 3D Shine overlay */
+    .wa-float-link::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      width: 28px;
+      height: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .4) 0%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .wa-float-link:hover::before {
+      opacity: .7;
+    }
+
+    /* Pulse rings */
+    .wa-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, .5);
+      transform: translate(-50%, -50%) scale(1);
+      animation: waPulseRing 2.5s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .wa-ring:nth-child(2) {
+      animation-delay: .8s;
+    }
+
+    .wa-ring:nth-child(3) {
+      animation-delay: 1.6s;
+    }
+
+    @keyframes waPulseRing {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: .7;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    /* Tooltip */
+    .wa-tooltip {
+      position: absolute;
+      left: 80px;
+      bottom: 50%;
+      transform: translateY(50%);
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      border: 1px solid rgba(37, 211, 102, .3);
+      border-radius: 14px;
+      padding: 10px 18px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .5), 0 0 20px rgba(37, 211, 102, .15);
+      opacity: 0;
+      pointer-events: none;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      transform: translateY(50%) translateX(-10px) scale(.9);
+    }
+
+    .social-btn-wrap:hover .wa-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(50%) translateX(0) scale(1);
+    }
+
+    /* Tooltip arrow */
+    .wa-tooltip::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 8px solid transparent;
+      border-left-color: rgba(37, 211, 102, .3);
+    }
+
+    .wa-tooltip::after {
+      content: '';
+      position: absolute;
+      right: calc(100% - 1px);
+      top: 50%;
+      transform: translateY(-50%);
+      border: 7px solid transparent;
+      border-left-color: #1f2937;
+    }
+
+    .wa-tooltip-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, .3);
+    }
+
+    .wa-tooltip-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-tooltip-label {
+      font-size: .72rem;
+      color: #9ca3af;
+      line-height: 1.2;
+    }
+
+    .wa-tooltip-num {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #25d366;
+      letter-spacing: .5px;
+      direction: ltr;
+    }
+
+    /* Notification badge */
+    .wa-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 22px;
+      height: 22px;
+      background: #ef4444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      font-weight: 800;
+      color: #fff;
+      border: 2px solid var(--dark);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, .5);
+      animation: waBadgePop .5s cubic-bezier(.16, 1, .3, 1) 3s both;
+    }
+
+    @keyframes waBadgePop {
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    /* ===== FACEBOOK 3D BUTTON ===== */
+    .fb-float-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1877f2 0%, #0d65d9 50%, #0a4fb0 100%);
+      box-shadow:
+        0 6px 20px rgba(24, 119, 242, .45),
+        0 0 36px rgba(24, 119, 242, .18),
+        inset 0 2px 4px rgba(255, 255, 255, .25),
+        inset 0 -2px 4px rgba(0, 0, 0, .15);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      transform-style: preserve-3d;
+      animation: fbFloat 4.5s ease-in-out infinite;
+    }
+
+    @keyframes fbFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+
+      25% {
+        transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotateX(-2deg) rotateY(3deg);
+      }
+
+      75% {
+        transform: translateY(-4px) rotateX(1deg) rotateY(-1deg);
+      }
+    }
+
+    .fb-float-link:hover {
+      transform: translateY(-8px) scale(1.12) rotateX(10deg) rotateY(-10deg) !important;
+      box-shadow:
+        0 14px 40px rgba(24, 119, 242, .55),
+        0 0 60px rgba(24, 119, 242, .25),
+        inset 0 2px 4px rgba(255, 255, 255, .3);
+    }
+
+    .fb-float-link svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .2));
+      transition: transform .4s;
+    }
+
+    .fb-float-link:hover svg {
+      transform: scale(1.15) rotate(-8deg);
+    }
+
+    /* 3D Shine */
+    .fb-float-link::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 7px;
+      width: 24px;
+      height: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .35) 0%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* FB Pulse rings */
+    .fb-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(24, 119, 242, .4);
+      transform: translate(-50%, -50%) scale(1);
+      animation: fbPulseRing 3s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .fb-ring:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    @keyframes fbPulseRing {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: .6;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+      }
+    }
+
+    /* FB Tooltip */
+    .fb-tooltip {
+      position: absolute;
+      left: 72px;
+      bottom: 50%;
+      transform: translateY(50%);
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      border: 1px solid rgba(24, 119, 242, .3);
+      border-radius: 12px;
+      padding: 8px 16px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .5), 0 0 16px rgba(24, 119, 242, .12);
+      opacity: 0;
+      pointer-events: none;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      transform: translateY(50%) translateX(-10px) scale(.9);
+    }
+
+    .social-btn-wrap:hover .fb-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(50%) translateX(0) scale(1);
+    }
+
+    .fb-tooltip::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 7px solid transparent;
+      border-left-color: rgba(24, 119, 242, .3);
+    }
+
+    .fb-tooltip::after {
+      content: '';
+      position: absolute;
+      right: calc(100% - 1px);
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-left-color: #1f2937;
+    }
+
+    .fb-tooltip-text {
+      font-size: .88rem;
+      font-weight: 600;
+      color: #60a5fa;
+    }
+
+    /* ===== RESPONSIVE SOCIAL BUTTONS ===== */
+    @media(max-width:768px) {
+      .social-float {
+        bottom: 18px;
+        left: 18px;
+        gap: 12px;
+      }
+
+      .wa-float-link {
+        width: 56px;
+        height: 56px;
+      }
+
+      .wa-float-link svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .wa-ring {
+        width: 56px;
+        height: 56px;
+      }
+
+      .fb-float-link {
+        width: 48px;
+        height: 48px;
+      }
+
+      .fb-float-link svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .fb-ring {
+        width: 48px;
+        height: 48px;
+      }
+
+      .wa-tooltip {
+        left: 70px;
+        padding: 8px 14px;
+        border-radius: 12px;
+      }
+
+      .wa-tooltip-num {
+        font-size: .92rem;
+      }
+
+      .fb-tooltip {
+        left: 60px;
+      }
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      backdrop-filter: blur(12px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-box {
+      background: var(--dark-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, .5);
+      animation: modalUp .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    @keyframes modalUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--gradient-primary);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 10px 28px rgba(99, 102, 241, .3);
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .modal-msg {
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .cred-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+
+    .cred-label {
+      font-size: .85rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-bottom: .3rem;
+    }
+
+    .cred-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .btn-modal {
+      background: var(--gradient-primary);
+      color: #fff;
+      padding: 12px 36px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .btn-modal:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, .3);
+    }
+
+    /* ===== SCROLL ANIM ===== */
+    .anim {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: all .6s ease-out;
+    }
+
+    .anim.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:1024px) {
       .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -944,366 +2031,153 @@
         order: 2;
       }
 
-      .hero-buttons {
+      .hero-btns {
         justify-content: center;
       }
 
-      .hero h1 {
-        font-size: 2.8rem;
+      .hero-desc {
+        margin: 0 auto 2rem;
       }
 
-      .floating-element {
+      .fl {
         display: none;
       }
 
-      .stats-container {
+      .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 768px) {
+    @media(max-width:768px) {
       .nav-links {
         display: none;
       }
 
-      .hero h1 {
-        font-size: 2.2rem;
+      .hamburger {
+        display: flex;
       }
 
-      .section-title {
-        font-size: 2rem;
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .stats-container {
-        grid-template-columns: 1fr;
+      .dl-checks {
+        flex-direction: column;
+        align-items: center;
+        gap: .8rem;
       }
 
-      .download-container {
+      .dl-container {
         padding: 2rem;
       }
 
-      .download-info {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .hero-preview {
+      .mock-window {
         transform: none;
       }
-    }
 
-    /* Scroll animations */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
-    }
-
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(12px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      animation: modalFadeIn 0.3s ease;
-    }
-
-    .modal-content {
-      background: var(--dark-lighter);
-      border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      padding: 3rem;
-      max-width: 550px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-      animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
       }
 
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes modalSlideUp {
-      from {
-        transform: translateY(40px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .modal-icon {
-      width: 80px;
-      height: 80px;
-      background: var(--gradient-primary);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-    }
-
-    .modal-title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .modal-message {
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-
-    .credential-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .credential-info {
-      text-align: center;
-    }
-
-    .credential-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .credential-value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .btn-close-modal {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 14px 40px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-close-modal:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-    }
-
-    /* Scroll Indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-      animation: fadeInScroll 2s ease-out;
-    }
-
-    .mouse {
-      width: 26px;
-      height: 42px;
-      border: 2px solid var(--glass-border);
-      border-radius: 20px;
-      position: relative;
-    }
-
-    .wheel {
-      width: 4px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 2px;
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: wheelMove 2s infinite;
-    }
-
-    @keyframes wheelMove {
-      0% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(-50%, 15px);
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeInScroll {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
+      .step-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Animated Background -->
-  <div class="bg-animation"></div>
-
-  <!-- Floating Particles -->
-  <div class="particles" id="particles"></div>
+  <!-- BG Effects -->
+  <div class="mesh-bg"></div>
+  <div class="aurora"><span></span><span></span><span></span></div>
 
   <!-- Header -->
   <header id="header">
     <nav>
       <a href="#" class="logo">
-        <img src="icon.png" alt="Dippo Logo" />
+        <img src="icon.png" alt="Dippo" />
         <span class="logo-text">Dippo</span>
       </a>
       <ul class="nav-links">
         <li><a href="#features">الميزات</a></li>
+        <li><a href="#how">كيف يعمل</a></li>
         <li><a href="#stats">الإحصائيات</a></li>
+        <li><a href="#reviews">آراء المستخدمين</a></li>
         <li><a href="#download">التحميل</a></li>
       </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#features" onclick="toggleMenu()">الميزات</a>
+    <a href="#how" onclick="toggleMenu()">كيف يعمل</a>
+    <a href="#stats" onclick="toggleMenu()">الإحصائيات</a>
+    <a href="#reviews" onclick="toggleMenu()">آراء المستخدمين</a>
+    <a href="#download" onclick="toggleMenu()">التحميل</a>
+  </div>
+
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-visual">
-        <div class="hero-preview">
-          <div class="preview-header">
-            <div class="preview-dot red"></div>
-            <div class="preview-dot yellow"></div>
-            <div class="preview-dot green"></div>
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <div class="mock-dot r"></div>
+            <div class="mock-dot y"></div>
+            <div class="mock-dot g"></div>
           </div>
-          <div class="preview-content">
-            <div class="preview-card">
-              <div class="preview-icon">📊</div>
+          <div class="mock-body">
+            <div class="mock-row">
+              <div class="mock-icon i1">📊</div>
               <div>
-                <div style="font-weight: 600">لوحة تحكم ذكية</div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary)">
-                  تحليلات في الوقت الفعلي
-                </div>
+                <div class="mock-label">لوحة تحكم ذكية</div>
+                <div class="mock-val">تحليلات لحظية</div>
               </div>
             </div>
-            <div class="preview-stats">
-              <div class="preview-stat">
-                <div class="preview-stat-value">1,248</div>
-                <div class="preview-stat-label">منتج</div>
-              </div>
-              <div class="preview-stat">
-                <div class="preview-stat-value">523</div>
-                <div class="preview-stat-label">عميل</div>
-              </div>
-              <div class="preview-stat">
-                <div class="preview-stat-value">89K</div>
-                <div class="preview-stat-label">مبيعات</div>
+            <div class="mock-stats">
+              <div class="mock-stat"><b>1,248</b><small>منتج</small></div>
+              <div class="mock-stat"><b>523</b><small>عميل</small></div>
+              <div class="mock-stat"><b>89K</b><small>مبيعات</small></div>
+            </div>
+            <div class="mock-row">
+              <div class="mock-icon i2">🛒</div>
+              <div>
+                <div class="mock-label">نقطة البيع</div>
+                <div class="mock-val">كاشير سريع واحترافي</div>
               </div>
             </div>
-            <div class="preview-card">
-              <div class="preview-icon">🛒</div>
+            <div class="mock-row">
+              <div class="mock-icon i3">📱</div>
               <div>
-                <div style="font-weight: 600">نقطة البيع</div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary)">
-                  كاشير سريع واحترافي
-                </div>
-              </div>
-            </div>
-            <div class="preview-card">
-              <div class="preview-icon" style="background: #0088cc">📱</div>
-              <div>
-                <div style="font-weight: 600">بوت التيليغرام</div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary)">
-                  تحكم عن بعد 24/7
-                </div>
+                <div class="mock-label">بوت التيليغرام</div>
+                <div class="mock-val">تحكم عن بعد 24/7</div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Floating Elements -->
-        <div class="floating-element el-1">
-          <div class="floating-icon green">✓</div>
-          <div class="floating-text">
-            <span class="label">المخزون</span>
-            <span class="value">متزامن</span>
-          </div>
+        <div class="fl f1">
+          <div class="fl-icon green">✓</div>
+          <div><span class="fl-lbl">المخزون</span><span class="fl-val">متزامن</span></div>
         </div>
-        <div class="floating-element el-2">
-          <div class="floating-icon blue">📈</div>
-          <div class="floating-text">
-            <span class="label">المبيعات اليوم</span>
-            <span class="value">+24%</span>
-          </div>
-        </div>
-        <div class="floating-element el-3">
-          <div class="floating-icon purple">🔔</div>
-          <div class="floating-text">
-            <span class="label">تنبيهات</span>
-            <span class="value">3 جديدة</span>
-          </div>
+        <div class="fl f2">
+          <div class="fl-icon pink">📈</div>
+          <div><span class="fl-lbl">المبيعات اليوم</span><span class="fl-val">+24%</span></div>
         </div>
       </div>
 
       <div class="hero-text">
-        <div class="hero-badge">
-          <span></span>
-          الإصدار 1.50 متوفر الآن
-        </div>
-        <h1>
-          نظام <span class="highlight">إدارة المبيعات والمخازن</span><br />
-          الذكي والمتكامل
-        </h1>
-        <p class="hero-description">
-          Dippo هو الحل الأمثل لتجار الجملة والتجزئة. من إدارة المخزون إلى
-          نقطة البيع، من الفواتير الاحترافية إلى التقارير المتقدمة - نظام شامل يلبي جميع احتياجات نشاطك التجاري.
-        </p>
-        <div class="hero-buttons">
+        <div class="hero-badge"><span class="dot"></span>الإصدار 1.50 متوفر الآن</div>
+        <h1>نظام <span class="grad">إدارة المبيعات والمخازن</span><br />الذكي والمتكامل</h1>
+        <p class="hero-desc">Dippo هو الحل الأمثل لتجار الجملة والتجزئة. من إدارة المخزون إلى نقطة البيع، من الفواتير
+          الاحترافية إلى التقارير المتقدمة.</p>
+        <div class="hero-btns">
           <a href="#download" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1311,7 +2185,7 @@
             </svg>
             تحميل مجاني
           </a>
-          <a href="#features" class="btn btn-secondary">
+          <a href="#features" class="btn btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1321,370 +2195,392 @@
         </div>
       </div>
     </div>
-
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-      <div class="mouse">
-        <div class="wheel"></div>
-      </div>
-      <span>اسحب للأسفل</span>
+    <div class="scroll-hint">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div><span>اسحب للأسفل</span>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
+  <!-- Features -->
+  <section class="section" id="features">
     <div class="section-header">
-      <span class="section-badge">✨ مميزات قوية</span>
+      <span class="section-tag">✨ مميزات قوية</span>
       <h2 class="section-title">كل ما تحتاجه لإدارة عملك</h2>
-      <p class="section-subtitle">أكثر من 20 ميزة متقدمة مصممة خصيصاً لتسهيل عملياتك اليومية وزيادة إنتاجيتك وأمان
-        بياناتك، مع تحكم كامل عبر هاتفك</p>
+      <p class="section-sub">أكثر من 20 ميزة متقدمة مصممة خصيصاً لتسهيل عملياتك اليومية</p>
     </div>
     <div class="features-grid">
-      <!-- Core Features -->
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">📦</div>
-        <h3 class="feature-title">إدارة المخزون الذكية</h3>
-        <p class="feature-description">تتبع دقيق لجميع منتجاتك مع تنبيهات المخزون المنخفض، تواريخ الصلاحية، الفئات
-          المتعددة، والباركود. دعم الوحدات المركبة (كيلو، لتر، قطعة).</p>
+      <div class="f-card anim">
+        <div class="f-icon default">📦</div>
+        <h3 class="f-title">إدارة المخزون الذكية</h3>
+        <p class="f-desc">تتبع دقيق لجميع منتجاتك مع تنبيهات المخزون المنخفض، تواريخ الصلاحية، الفئات المتعددة،
+          والباركود.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🛒</div>
-        <h3 class="feature-title">نقطة البيع (POS)</h3>
-        <p class="feature-description">كاشير احترافي مع ماسح الباركود، خصومات متعددة، ضريبة TVA التلقائية، الدفع الجزئي،
-          والطباعة الفورية. دعم الكميات الكسرية.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">🛒</div>
+        <h3 class="f-title">نقطة البيع (POS)</h3>
+        <p class="f-desc">كاشير احترافي مع ماسح الباركود، خصومات متعددة، ضريبة TVA التلقائية، الدفع الجزئي، والطباعة
+          الفورية.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🧾</div>
-        <h3 class="feature-title">فواتير البيع والشراء</h3>
-        <p class="feature-description">إنشاء فواتير احترافية (بيع بالجملة/التجزئة، شراء) مع قوالب متعددة، أقسام
-          الفاتورة، الخصومات المتفاوتة، وتصدير PDF مباشر.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">🧾</div>
+        <h3 class="f-title">فواتير البيع والشراء</h3>
+        <p class="f-desc">إنشاء فواتير احترافية مع قوالب متعددة، الخصومات المتفاوتة، وتصدير PDF مباشر.</p>
       </div>
-
-      <!-- Advanced Features -->
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">🔍</div>
-        <h3 class="feature-title">سجل التدقيق والمراقبة</h3>
-        <p class="feature-description">تتبع كامل لجميع العمليات: من أضاف، عدّل، أو حذف. عرض الفروقات (Diff)، فلترة حسب
-          المستخدم والتاريخ، تصدير CSV/PDF، وحذف السجلات القديمة.</p>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">🔍</div>
+        <h3 class="f-title">سجل التدقيق والمراقبة</h3>
+        <p class="f-desc">تتبع كامل لجميع العمليات: من أضاف، عدّل، أو حذف. عرض الفروقات وفلترة حسب المستخدم والتاريخ.
+        </p>
       </div>
-
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">⚠️</div>
-        <h3 class="feature-title">نظام كشف الاحتيال</h3>
-        <p class="feature-description">تنبيهات ذكية للعمليات المشبوهة: خصومات مفرطة، إلغاء فواتير كبيرة، مرتجعات متكررة،
-          فواتير ضخمة، وعمليات خارج ساعات العمل. مستويات خطورة متعددة.</p>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">⚠️</div>
+        <h3 class="f-title">نظام كشف الاحتيال</h3>
+        <p class="f-desc">تنبيهات ذكية للعمليات المشبوهة: خصومات مفرطة، إلغاء فواتير كبيرة، مرتجعات متكررة.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">📋</div>
-        <h3 class="feature-title">سندات الائتمان (المرتجعات)</h3>
-        <p class="feature-description">إدارة مرتجعات البيع والشراء مع سندات ائتمان رسمية، ربط تلقائي بالفاتورة الأصلية،
-          تحديث المخزون والرصيد المالي آلياً.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">📋</div>
+        <h3 class="f-title">سندات الائتمان</h3>
+        <p class="f-desc">إدارة مرتجعات البيع والشراء مع سندات ائتمان رسمية وتحديث المخزون آلياً.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">💵</div>
-        <h3 class="feature-title">سجل الديون والمستحقات</h3>
-        <p class="feature-description">متابعة ديون العملاء ومستحقات الموردين، كشوفات حساب تفصيلية، تسديد جزئي/كلي،
-          تعديلات يدوية، وطباعة التقارير.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">💵</div>
+        <h3 class="f-title">سجل الديون والمستحقات</h3>
+        <p class="f-desc">متابعة ديون العملاء ومستحقات الموردين، كشوفات حساب تفصيلية، تسديد جزئي/كلي.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">📊</div>
-        <h3 class="feature-title">تقارير وتحليلات متقدمة</h3>
-        <p class="feature-description">ملخصات يومية/شهرية/سنوية، تقارير المبيعات والمشتريات، تحليل مبيعات المنتجات،
-          المنتجات منتهية الصلاحية، وتصدير PDF.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">📊</div>
+        <h3 class="f-title">تقارير وتحليلات متقدمة</h3>
+        <p class="f-desc">ملخصات يومية/شهرية/سنوية، تقارير المبيعات والمشتريات، وتصدير PDF.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">📝</div>
-        <h3 class="feature-title">جرد المخزون (Stocktake)</h3>
-        <p class="feature-description">جلسات جرد كاملة مع مسح الباركود، عرض الفروقات بين النظام والواقع، تحديث الكميات
-          بنقرة، وطباعة أوراق الجرد.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">📝</div>
+        <h3 class="f-title">جرد المخزون</h3>
+        <p class="f-desc">جلسات جرد كاملة مع مسح الباركود وعرض الفروقات بين النظام والواقع.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🏷️</div>
-        <h3 class="feature-title">ملصقات الأسعار</h3>
-        <p class="feature-description">طباعة ملصقات أسعار احترافية مع الباركود، دعم طابعات A4 وطابعات الملصقات المخصصة،
-          تخصيص الحجم والتصميم.</p>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#0088cc,#00a2ed)">📱</div>
+        <h3 class="f-title">لوحة تحكم Telegram</h3>
+        <p class="f-desc">تحكم في تجارتك من أي مكان! تقارير المبيعات، بحث المنتجات، تنبيهات الاحتيال، والنسخ الاحتياطي
+          عبر Telegram.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">👥</div>
-        <h3 class="feature-title">العملاء والموردين</h3>
-        <p class="feature-description">قاعدة بيانات شاملة مع معلومات التواصل، NIF/RC/AI/NIS، سجل المعاملات، الأرصدة،
-          وتاريخ المدفوعات الكامل.</p>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#10b981,#059669)">🌙</div>
+        <h3 class="f-title">حاسبة الزكاة الذكية</h3>
+        <p class="f-desc">حساب تلقائي للزكاة بناءً على قيمة المخزون والسيولة والديون مع مراعاة النصاب.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">💰</div>
-        <h3 class="feature-title">إدارة الخزينة والمصروفات</h3>
-        <p class="feature-description">تتبع المصروفات والإيرادات، تصنيف حسب النوع، ملخص يومي، حماية من الرصيد السلبي،
-          وتقارير مالية شاملة.</p>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">🏢</div>
+        <h3 class="f-title">التقرير المالي الشامل</h3>
+        <p class="f-desc">رؤية كاملة لثروة المؤسسة: إجمالي الأصول، الالتزامات، وصافي رأس المال في تقرير واحد.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🔐</div>
-        <h3 class="feature-title">أمان وصلاحيات متقدمة</h3>
-        <p class="feature-description">أدوار مخصصة (مدير، كاشير، مخزني)، صلاحيات دقيقة لكل ميزة، تشفير البيانات، كشف
-          محاولات التلاعب، ونظام تراخيص احترافي.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">🏪</div>
+        <h3 class="f-title">المستودعات المتعددة</h3>
+        <p class="f-desc">إدارة عدة مستودعات مع تحويلات وتقارير منفصلة لكل موقع.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">💾</div>
-        <h3 class="feature-title">النسخ الاحتياطي والاسترجاع</h3>
-        <p class="feature-description">نسخ احتياطي تلقائي عند الإغلاق، دعم SQLite وPostgreSQL، استرجاع بنقرة واحدة، وحفظ
-          في مسار مخصص.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">💰</div>
+        <h3 class="f-title">إدارة الخزينة</h3>
+        <p class="f-desc">تتبع المصروفات والإيرادات، تصنيف حسب النوع، حماية من الرصيد السلبي.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #0088cc, #00a2ed);">📱</div>
-        <h3 class="feature-title">لوحة تحكم Telegram المتكاملة</h3>
-        <p class="feature-description">تحكم في تجارتك من أي مكان في العالم! استعرض تقارير المبيعات والأرباح، ابحث عن
-          المنتجات، عدّل الأسعار، استلم تنبيهات الاحتيال، وقم بإجراء النسخ الاحتياطي - كل ذلك عبر تطبيق Telegram مباشرة
-          وبأمان تام.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">🔐</div>
+        <h3 class="f-title">أمان وصلاحيات متقدمة</h3>
+        <p class="f-desc">أدوار مخصصة، صلاحيات دقيقة، تشفير البيانات، كشف محاولات التلاعب.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669);">🌙</div>
-        <h3 class="feature-title">حاسبة الزكاة الذكية</h3>
-        <p class="feature-description">حساب تلقائي دقيق للزكاة بناءً على قيمة المخزون الحالية، السيولة النقدية في
-          الخزينة، والديون المرجوة، مع مراعاة نصاب الزكاة وتحويل الحول آلياً لضمان أداء فريضتك بيسر.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">💾</div>
+        <h3 class="f-title">النسخ الاحتياطي</h3>
+        <p class="f-desc">نسخ احتياطي تلقائي، دعم SQLite وPostgreSQL، استرجاع بنقرة واحدة.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">📅</div>
-        <h3 class="feature-title">التقرير المالي السنوي</h3>
-        <p class="feature-description">تحليل أداء نشاطك التجاري على مدار العام. مقارنات شهرية للمبيعات، الأرباح،
-          والمصاريف، مع رسوم بيانية توضح اتجاهات النمو الموسمية بدقة عالية.</p>
+      <div class="f-card anim">
+        <div class="f-icon default">🌐</div>
+        <h3 class="f-title">دعم متعدد اللغات</h3>
+        <p class="f-desc">واجهة بالعربية والفرنسية والإنجليزية مع دعم RTL/LTR.</p>
       </div>
-
-      <div class="feature-card animate-on-scroll featured">
-        <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">🏢</div>
-        <h3 class="feature-title">التقرير المالي الشامل</h3>
-        <p class="feature-description">رؤية كاملة لثروة المؤسسة (Asset Overview). حساب إجمالي الأصول، الالتزامات (ديون
-          الموردين)، وصافي رأس المال (Equity) في تقرير واحد محدث لحظياً لاتخاذ قرارات استراتيجية.</p>
-      </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🏪</div>
-        <h3 class="feature-title">المستودعات المتعددة</h3>
-        <p class="feature-description">إدارة عدة مستودعات، تحويلات بين المواقع، تتبع الكميات لكل مستودع، وتقارير منفصلة
-          لكل موقع.</p>
-      </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">🌐</div>
-        <h3 class="feature-title">دعم متعدد اللغات</h3>
-        <p class="feature-description">واجهة كاملة بالعربية والفرنسية والإنجليزية، تبديل فوري، دعم RTL/LTR، وتحويل
-          الأرقام إلى كلمات عربية.</p>
-      </div>
-
-      <div class="feature-card animate-on-scroll">
-        <div class="feature-icon">⚙️</div>
-        <h3 class="feature-title">إعدادات شاملة</h3>
-        <p class="feature-description">تخصيص بيانات الشركة، معدلات TVA، تنسيق الفواتير، خيارات الطباعة، حدود الخصومات،
-          ساعات العمل، والمزيد.</p>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="stats" id="stats">
-    <div class="stats-container">
-      <div class="stat-item animate-on-scroll">
-        <div class="stat-number">20+</div>
-        <div class="stat-label">ميزة أساسية</div>
-      </div>
-      <div class="stat-item animate-on-scroll">
-        <div class="stat-number">99.9%</div>
-        <div class="stat-label">موثوقية النظام</div>
-      </div>
-      <div class="stat-item animate-on-scroll">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">دعم فني</div>
-      </div>
-      <div class="stat-item animate-on-scroll">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">أمان البيانات</div>
+      <div class="f-card anim">
+        <div class="f-icon default">⚙️</div>
+        <h3 class="f-title">إعدادات شاملة</h3>
+        <p class="f-desc">تخصيص بيانات الشركة، معدلات TVA، تنسيق الفواتير وخيارات الطباعة.</p>
       </div>
     </div>
   </section>
 
-  <!-- Download Section -->
-  <section class="download" id="download">
-    <div class="download-container">
-      <div class="download-icon">⬇️</div>
+  <!-- How It Works -->
+  <section class="section" id="how">
+    <div class="section-header">
+      <span class="section-tag">🚀 سهل الاستخدام</span>
+      <h2 class="section-title">ابدأ في 3 خطوات فقط</h2>
+      <p class="section-sub">من التحميل إلى الإنتاجية الكاملة في دقائق معدودة</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item anim">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <h3>حمّل وثبّت البرنامج</h3>
+          <p>تحميل مجاني وتثبيت فوري على Windows. لا حاجة لخبرة تقنية.</p>
+        </div>
+      </div>
+      <div class="step-item anim">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <h3>أدخل بيانات شركتك</h3>
+          <p>أضف اسم شركتك، المنتجات، العملاء، والموردين. يمكنك استيراد البيانات من Excel مباشرة.</p>
+        </div>
+      </div>
+      <div class="step-item anim">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <h3>ابدأ البيع والإدارة</h3>
+          <p>استخدم نقطة البيع والفوترة الذكية. تابع أعمالك من أي مكان عبر Telegram.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-box anim">
+        <div class="stat-num" data-target="20">0</div>
+        <div class="stat-lbl">ميزة أساسية +</div>
+      </div>
+      <div class="stat-box anim">
+        <div class="stat-num" data-target="99">0</div>
+        <div class="stat-lbl">% موثوقية النظام</div>
+      </div>
+      <div class="stat-box anim">
+        <div class="stat-num no-count">24/7</div>
+        <div class="stat-lbl">دعم فني</div>
+      </div>
+      <div class="stat-box anim">
+        <div class="stat-num" data-target="100">0</div>
+        <div class="stat-lbl">% أمان البيانات</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="reviews">
+    <div class="section-header">
+      <span class="section-tag">💬 آراء المستخدمين</span>
+      <h2 class="section-title">ماذا يقول عملاؤنا</h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="t-card" id="t-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote" id="t-quote">"Dippo غيّر طريقة إدارتي لمحلي بالكامل. النظام سهل وسريع وشامل."</p>
+        <div class="t-author" id="t-author">أحمد بن علي</div>
+        <div class="t-role" id="t-role">صاحب محل تجارة جملة - سطيف</div>
+      </div>
+      <div class="t-dots">
+        <div class="t-dot active" onclick="showTestimonial(0)"></div>
+        <div class="t-dot" onclick="showTestimonial(1)"></div>
+        <div class="t-dot" onclick="showTestimonial(2)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section class="section" id="download">
+    <div class="dl-container">
+      <div class="dl-icon">⬇️</div>
       <h2>جاهز للبدء؟</h2>
       <p>حمّل Dippo الآن وابدأ في إدارة عملك باحترافية</p>
-
-      <div class="download-info">
-        <div class="download-info-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+      <div class="dl-checks">
+        <div class="dl-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-          <span>Windows 10/11</span>
-        </div>
-        <div class="download-info-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+          </svg><span>Windows 10/11</span></div>
+        <div class="dl-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-          <span>تثبيت سهل</span>
-        </div>
-        <div class="download-info-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+          </svg><span>تثبيت سهل</span></div>
+        <div class="dl-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-          <span>تجربة مجانية</span>
-        </div>
+          </svg><span>تجربة مجانية</span></div>
       </div>
-
-      <a href="https://bit.ly/4qEqKFB" download class="btn-download" id="final-download-btn">
+      <a href="https://bit.ly/4qEqKFB" class="btn-dl" id="dl-btn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         تحميل Dippo الآن
       </a>
-
-      <div class="version-tag">الإصدار 1.50 • © 2026-2027</div>
+      <div class="ver-tag">الإصدار 1.50 • © 2026-2027</div>
+      <!-- Compatibility Warning -->
+      <div class="compat-warning anim">
+        <div class="compat-card">
+          <div class="warn-icon-wrap">⚠️</div>
+          <div class="warn-content">
+            <div class="warn-title">
+              <span class="warn-title-dot"></span>
+              تنبيه التوافق
+            </div>
+            <p class="warn-text">البرنامج <strong>غير متوافق</strong> مع أنظمة التشغيل القديمة (Windows 7/8/XP)</p>
+            <div class="warn-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              متوافق مع Windows 10 / 11
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Modal for Login Info -->
+  <!-- Modal -->
   <div class="modal-overlay" id="login-modal">
-    <div class="modal-content">
+    <div class="modal-box">
       <div class="modal-icon">🔑</div>
       <h3 class="modal-title">معلومات الدخول</h3>
-      <p class="modal-message">
-        في نافذة تسجيل الدخول لبرنامج Dippo استخدم البيانات التالية:
-      </p>
-      <div class="credential-card">
-        <div class="credential-info">
-          <span class="credential-label">إسم المستخدم</span>
-          <span class="credential-value">admin</span>
+      <p class="modal-msg">في نافذة تسجيل الدخول لبرنامج Dippo استخدم البيانات التالية:</p>
+      <div class="cred-card">
+        <div style="text-align:center"><span class="cred-label">إسم المستخدم</span><span class="cred-val">admin</span>
         </div>
-        <div class="credential-info">
-          <span class="credential-label">كلمة السر</span>
-          <span class="credential-value">admin123</span>
+        <div style="text-align:center"><span class="cred-label">كلمة السر</span><span class="cred-val">admin123</span>
         </div>
       </div>
-      <button class="btn-close-modal" onclick="closeModal()">حسناً، فهمت</button>
+      <button class="btn-modal" onclick="closeModal()">حسناً، فهمت</button>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <div class="footer-logo">
-        <img src="../app/ui/assets/icon.png" alt="Dippo" />
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="icon.png" alt="Dippo" />
         <span class="logo-text">Dippo</span>
       </div>
-      <div class="footer-links">
+      <div class="footer-nav">
         <a href="#features">الميزات</a>
+        <a href="#how">كيف يعمل</a>
         <a href="#download">التحميل</a>
         <a href="https://www.facebook.com/profile.php?id=61573859656286">الدعم</a>
       </div>
-      <p class="copyright">
-        جميع الحقوق محفوظة © 2026-2027 <strong>gunouni zineeddine</strong>
-      </p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61573859656286" title="Facebook">f</a>
+        <a href="mailto:demo.dippo@gmail.com" title="Email">✉</a>
+      </div>
+      <p class="footer-copy">جميع الحقوق محفوظة © 2026-2027 <strong>gunouni zineeddine</strong></p>
     </div>
   </footer>
 
   <script>
-    // Header scroll effect
+    // Header scroll
     const header = document.getElementById("header");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
-    });
+    window.addEventListener("scroll", () => { header.classList.toggle("scrolled", window.scrollY > 50) });
 
-    // Generate floating particles
-    const particlesContainer = document.getElementById("particles");
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      particle.style.left = Math.random() * 100 + "%";
-      particle.style.animationDelay = Math.random() * 15 + "s";
-      particle.style.animationDuration = 15 + Math.random() * 10 + "s";
-      particlesContainer.appendChild(particle);
+    // Hamburger
+    function toggleMenu() {
+      document.getElementById("hamburger").classList.toggle("active");
+      document.getElementById("mobile-menu").classList.toggle("open");
     }
 
     // Scroll animations
-    const animatedElements = document.querySelectorAll(".animate-on-scroll");
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
+    const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible") }) }, { threshold: .1, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".anim").forEach(el => obs.observe(el));
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+    // Staggered card entrance
+    const cardObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const cards = e.target.querySelectorAll('.f-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), i * 120);
+          });
+          cardObs.unobserve(e.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: .15 });
+    const fg = document.querySelector('.features-grid');
+    if (fg) cardObs.observe(fg);
 
-    animatedElements.forEach((el) => observer.observe(el));
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
+    // Counter animation
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target; if (el.classList.contains("no-count")) return;
+          const target = +el.dataset.target; let current = 0;
+          const step = Math.max(1, Math.floor(target / 40));
+          const timer = setInterval(() => { current += step; if (current >= target) { current = target; clearInterval(timer) } el.textContent = current }, 30);
+          counterObs.unobserve(el);
         }
-      });
-    });
+      })
+    }, { threshold: .5 });
+    document.querySelectorAll(".stat-num[data-target]").forEach(el => counterObs.observe(el));
 
-    // Show Login Modal on Download
-    const downloadBtn = document.getElementById('final-download-btn');
-    const loginModal = document.getElementById('login-modal');
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener("click", function (e) { e.preventDefault(); const t = document.querySelector(this.getAttribute("href")); if (t) t.scrollIntoView({ behavior: "smooth" }) }) });
 
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', (e) => {
-        // Prevent the download from starting immediately
-        e.preventDefault();
-
-        // Show the modal with credentials
-        loginModal.style.display = 'flex';
-      });
+    // Testimonials
+    const testimonials = [
+      { quote: '"Dippo غيّر طريقة إدارتي لمحلي بالكامل. النظام سهل وسريع وشامل."', author: "أحمد بن علي", role: "صاحب محل تجارة جملة - سطيف" },
+      { quote: '"بوت التيليجرام ميزة رائعة! أتابع مبيعاتي من أي مكان دون الحاجة للتواجد في المحل."', author: "محمد الأمين", role: "تاجر تجزئة - وهران" },
+      { quote: '"أنصح به كل تاجر يريد تنظيم عمله. نظام كشف الاحتيال وفّر لي الكثير من المال."', author: "ياسين حداد", role: "صاحب سلسلة محلات - الجزائر العاصمة" }
+    ];
+    let currentT = 0;
+    function showTestimonial(i) {
+      currentT = i;
+      document.getElementById("t-quote").textContent = testimonials[i].quote;
+      document.getElementById("t-author").textContent = testimonials[i].author;
+      document.getElementById("t-role").textContent = testimonials[i].role;
+      document.querySelectorAll(".t-dot").forEach((d, j) => d.classList.toggle("active", j === i));
     }
+    setInterval(() => { showTestimonial((currentT + 1) % testimonials.length) }, 5000);
 
+    // Download modal
+    const dlBtn = document.getElementById("dl-btn"), modal = document.getElementById("login-modal");
+    dlBtn.addEventListener("click", e => { e.preventDefault(); modal.style.display = "flex" });
     function closeModal() {
-      loginModal.style.display = 'none';
-
-      // Trigger the download after the user clicks "Ok"
-      const downloadUrl = downloadBtn.getAttribute('href');
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = '';
-      a.target = '_blank'; // Open in new tab if needed for some browsers to handle direct links
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      modal.style.display = "none";
+      const a = document.createElement("a"); a.href = dlBtn.getAttribute("href"); a.download = ""; a.target = "_blank"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }
-
-    // Close modal when clicking outside content (this should NOT trigger download usually, 
-    // but if we want it to just close without downloading, we can keep it as is. 
-    // However, usually the user expects the download to start after seeing the info.)
-    loginModal.addEventListener('click', (e) => {
-      if (e.target === loginModal) {
-        loginModal.style.display = 'none';
-      }
-    });
+    modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none" });
   </script>
+
+  <!-- Social 3D Floating Buttons -->
+  <div class="social-float">
+    <!-- WhatsApp Button -->
+    <div class="social-btn-wrap">
+      <div class="wa-ring"></div>
+      <div class="wa-ring"></div>
+      <div class="wa-ring"></div>
+      <a class="wa-float-link" href="https://wa.me/213556828367" target="_blank" rel="noopener"
+        aria-label="تواصل معنا عبر واتساب">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958A15.907 15.907 0 0016.004 32C24.826 32 32 24.826 32 16.004S24.826 0 16.004 0zm9.332 22.616c-.39 1.1-1.932 2.014-3.164 2.282-.844.18-1.946.322-5.656-1.216-4.746-1.966-7.792-6.78-8.028-7.096-.228-.316-1.9-2.532-1.9-4.83s1.2-3.428 1.628-3.896c.39-.426.922-.618 1.256-.618.152 0 .288.008.41.014.428.018.642.042.924.716.354.842 1.216 2.96 1.322 3.176.108.216.216.502.072.788-.136.294-.256.476-.472.732-.216.256-.422.452-.638.73-.194.242-.414.5-.176.928.238.426 1.058 1.746 2.272 2.83 1.562 1.394 2.878 1.826 3.286 2.028.408.202.648.17.886-.1.246-.278 1.052-1.222 1.332-1.642.274-.42.554-.35.928-.21.378.136 2.394 1.13 2.804 1.336.408.21.682.31.782.484.098.174.098 1.012-.292 2.112z" />
+        </svg>
+        <span class="wa-badge">1</span>
+      </a>
+      <div class="wa-tooltip">
+        <div class="wa-tooltip-icon">💬</div>
+        <div class="wa-tooltip-text">
+          <span class="wa-tooltip-label">تواصل معنا عبر واتساب</span>
+          <span class="wa-tooltip-num">0556 82 83 67</span>
+        </div>
+      </div>
+    </div>
+    <!-- Facebook Button -->
+    <div class="social-btn-wrap">
+      <div class="fb-ring"></div>
+      <div class="fb-ring"></div>
+      <a class="fb-float-link" href="https://www.facebook.com/profile.php?id=61573859656286" target="_blank"
+        rel="noopener" aria-label="تابعنا على فيسبوك">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+        </svg>
+      </a>
+      <div class="fb-tooltip">
+        <span class="fb-tooltip-text">تابعنا على فيسبوك</span>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
