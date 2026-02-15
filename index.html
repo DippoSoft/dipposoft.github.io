@@ -2016,7 +2016,286 @@
       transform: translateY(0);
     }
 
-    /* ===== RESPONSIVE ===== */
+
+    /* ===== RAMADAN DECORATION 3D PREMIUM ===== */
+    .ramadan-hanger {
+      position: fixed;
+      top: 0;
+      right: 50px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    /* Main String */
+    .r-string-main {
+      width: 4px;
+      height: 140px;
+      background: linear-gradient(90deg, #b45309, #fcd34d, #b45309);
+      box-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+      transform-origin: top center;
+      animation: stringSwing 5s ease-in-out infinite alternate;
+    }
+
+    /* Secondary String (Smaller Lantern) */
+    .r-string-sec {
+      position: absolute;
+      top: 0;
+      right: 60px;
+      width: 3px;
+      height: 90px;
+      background: linear-gradient(90deg, #b45309, #fcd34d, #b45309);
+      transform-origin: top center;
+      animation: stringSwing 4s ease-in-out infinite alternate-reverse;
+    }
+
+    /* Lantern Container */
+    .r-lantern-box {
+      position: relative;
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+
+    .r-lantern-main {
+      width: 90px;
+      height: 130px;
+      margin-top: -8px;
+      /* Connect to string */
+      transform-origin: top center;
+      animation: lanternSwing 5s ease-in-out infinite alternate;
+    }
+
+    .r-lantern-sec {
+      position: absolute;
+      top: 90px;
+      /* End of sec string */
+      right: 43px;
+      /* Align with sec string */
+      width: 50px;
+      height: 75px;
+      transform-origin: top center;
+      animation: lanternSwing 4s ease-in-out infinite alternate-reverse;
+    }
+
+    /* Generic Lantern Styling */
+    .lantern-shape {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    /* Top Dome */
+    .l-top {
+      position: absolute;
+      top: 0;
+      left: 20%;
+      width: 60%;
+      height: 25%;
+      background: linear-gradient(135deg, #b45309, #d97706);
+      border-radius: 50% 50% 5px 5px;
+      border: 2px solid #fcd34d;
+      border-bottom: none;
+      box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    .l-top::after {
+      /* Ring */
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      border: 3px solid #fcd34d;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(251, 191, 36, 0.8);
+    }
+
+    /* Middle Glass Body */
+    .l-body {
+      position: absolute;
+      top: 24%;
+      left: 10%;
+      width: 80%;
+      height: 55%;
+      background: radial-gradient(circle at 60% 40%, rgba(254, 243, 199, 0.9), rgba(251, 191, 36, 0.7));
+      border: 2px solid #fcd34d;
+      box-shadow:
+        0 0 40px rgba(251, 191, 36, 0.6),
+        inset 0 0 20px rgba(255, 255, 255, 0.6);
+      clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Islamic Pattern Overlay */
+    .l-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(30deg, #f59e0b 12%, transparent 12.5%, transparent 87%, #f59e0b 87.5%, #f59e0b),
+        linear-gradient(150deg, #f59e0b 12%, transparent 12.5%, transparent 87%, #f59e0b 87.5%, #f59e0b),
+        linear-gradient(30deg, #f59e0b 12%, transparent 12.5%, transparent 87%, #f59e0b 87.5%, #f59e0b),
+        linear-gradient(150deg, #f59e0b 12%, transparent 12.5%, transparent 87%, #f59e0b 87.5%, #f59e0b),
+        linear-gradient(60deg, #fcd34d77 25%, transparent 25.5%, transparent 75%, #fcd34d77 75%, #fcd34d77),
+        linear-gradient(60deg, #fcd34d77 25%, transparent 25.5%, transparent 75%, #fcd34d77 75%, #fcd34d77);
+      background-size: 20px 35px;
+      background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
+      opacity: 0.15;
+    }
+
+    /* Inner Light Source */
+    .l-light {
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, #fff 20%, #fcd34d 60%, transparent 80%);
+      filter: blur(8px);
+      animation: lightPulse 3s ease-in-out infinite alternate;
+    }
+
+    /* Bottom */
+    .l-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 22%;
+      background: linear-gradient(135deg, #b45309, #d97706);
+      border-radius: 0 0 20px 20px;
+      border: 2px solid #fcd34d;
+      border-top: none;
+      box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+    }
+
+    .l-tassel {
+      width: 6px;
+      height: 25px;
+      background: #dc2626;
+      margin-top: 15px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .l-tassel::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: -4px;
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(circle at top, #dc2626, #991b1b);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    /* Crescent Moon Icon inside Main Lantern */
+    .l-moon-icon {
+      position: absolute;
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 0 0 10px #fcd34d;
+      z-index: 5;
+      animation: moonFloat 3s ease-in-out infinite;
+    }
+
+    /* Badge */
+    .r-badge {
+      margin-top: 120px;
+      background: rgba(17, 24, 39, 0.85);
+      /* Dark semi-transparent */
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      padding: 6px 16px;
+      border-radius: 20px;
+      color: #fcd34d;
+      font-family: 'Cairo', sans-serif;
+      /* Ensure font is available */
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      animation: badgeFloat 4s ease-in-out infinite;
+      transform: rotateY(10deg);
+    }
+
+    @keyframes lanternSwing {
+      0% {
+        transform: rotate(4deg) translateX(2px);
+      }
+
+      100% {
+        transform: rotate(-4deg) translateX(-2px);
+      }
+    }
+
+    @keyframes stringSwing {
+      0% {
+        transform: rotate(2deg);
+      }
+
+      100% {
+        transform: rotate(-2deg);
+      }
+    }
+
+    @keyframes lightPulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes badgeFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(5px);
+      }
+    }
+
+    @keyframes moonFloat {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-3px) rotate(5deg);
+      }
+    }
+
+    /* Adjust for mobile */
+    @media (max-width: 600px) {
+      .ramadan-hanger {
+        right: 10px;
+        transform: scale(0.75);
+        transform-origin: top right;
+      }
+    }
+
+
+
     @media(max-width:1024px) {
       .hero-content {
         grid-template-columns: 1fr;
@@ -2086,10 +2365,279 @@
         text-align: center;
       }
     }
+
+    /* ===== RAMADAN LUXURY EDITION ===== */
+    .ramadan-luxury {
+      position: fixed;
+      top: 0;
+      right: 40px;
+      z-index: 3000;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Swing Animation for Strings */
+    .r-swing-1 {
+      animation: rSwing 4s ease-in-out infinite alternate;
+      transform-origin: top center;
+    }
+
+    .r-swing-2 {
+      animation: rSwing 5s ease-in-out infinite alternate-reverse;
+      transform-origin: top center;
+    }
+
+    .r-swing-3 {
+      animation: rSwing 3.5s ease-in-out infinite alternate;
+      transform-origin: top center;
+    }
+
+    @keyframes rSwing {
+      0% {
+        transform: rotate(3deg);
+      }
+
+      100% {
+        transform: rotate(-3deg);
+      }
+    }
+
+    /* Internal Glow/Pulse */
+    .r-pulse {
+      animation: rPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes rPulse {
+      0% {
+        opacity: 0.7;
+        filter: drop-shadow(0 0 5px #fbbf24);
+      }
+
+      100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 15px #fbbf24);
+      }
+    }
+
+    /* Star Twinkle */
+    .r-twinkle {
+      animation: rTwinkle 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes rTwinkle {
+      0% {
+        opacity: 0.3;
+        transform: scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    /* Badge Style */
+    .r-badge-luxury {
+      position: absolute;
+      top: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgba(30, 58, 138, 0.9), rgba(17, 24, 39, 0.9));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      padding: 8px 20px;
+      border-radius: 50px;
+      color: #fbbf24;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
+      animation: badgeGlow 3s ease-in-out infinite alternate;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .r-badge-luxury::before,
+    .r-badge-luxury::after {
+      content: '✦';
+      color: #fce7f3;
+      font-size: 0.8rem;
+    }
+
+    @keyframes badgeGlow {
+      from {
+        box-shadow: 0 0 10px rgba(251, 191, 36, 0.1);
+        border-color: rgba(251, 191, 36, 0.3);
+      }
+
+      to {
+        box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+        border-color: rgba(251, 191, 36, 0.6);
+      }
+    }
+
+    /* Mobile Adjust */
+    @media (max-width: 600px) {
+      .ramadan-luxury {
+        right: -20px;
+        transform: scale(0.7);
+        transform-origin: top right;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Ramadan Luxury Edition Refined -->
+  <div class="ramadan-luxury">
+    <div class="r-swing-1" style="transform-origin: top center;">
+      <img src="crescent_moon.png" alt="Ramadan Crescent"
+        style="width: 280px; filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4)); pointer-events: auto;" />
+    </div>
+    <div style="display: none;">
+      <!-- Defs for Gradients -->
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="50%" stop-color="#B45309" />
+          <stop offset="100%" stop-color="#FCD34D" />
+        </linearGradient>
+        <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.9" />
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+        </radialGradient>
+        <filter id="dropShadow" x="-50" y="-50" width="200" height="200">
+          <feDropShadow dx="-2" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.3)" />
+        </filter>
+        <pattern id="patternCheck" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M0 10L10 0M5 5L10 10M0 0L5 5" stroke="#B45309" stroke-width="0.5" stroke-opacity="0.3" />
+        </pattern>
+      </defs>
+
+      <!-- Main Hanging String -->
+      <g class="r-swing-1" style="transform-origin: 120px 0;">
+        <line x1="120" y1="0" x2="120" y2="90" stroke="url(#goldGrad)" stroke-width="2.5" />
+
+        <!-- Large Crescent Moon Refined -->
+        <g transform="translate(120, 120)">
+          <path d="M-30 -35 A 45 45 0 1 0 35 40 A 38 38 0 1 1 -30 -35 Z" fill="url(#goldGrad)" stroke="#B45309"
+            stroke-width="1.5" filter="url(#dropShadow)" />
+          <path d="M-30 -35 A 45 45 0 1 0 35 40 A 38 38 0 1 1 -30 -35 Z" fill="url(#patternCheck)" opacity="0.4" />
+
+          <!-- Hanging Star -->
+          <g class="r-swing-3" style="transform-origin: 0 45px;">
+            <line x1="0" y1="45" x2="0" y2="80" stroke="#FCD34D" stroke-width="1" />
+            <path transform="translate(0, 88) scale(0.6)"
+              d="M0 -15 L4 -4 L15 -4 L6 4 L9 15 L0 8 L-9 15 L-6 4 L-15 -4 L-4 -4 Z" fill="#FCD34D" class="r-twinkle" />
+          </g>
+        </g>
+      </g>
+
+      <!-- Secondary String & Lantern -->
+      <g class="r-swing-2" style="transform-origin: 190px 0;">
+        <line x1="190" y1="0" x2="190" y2="140" stroke="url(#goldGrad)" stroke-width="1.5" />
+        <g transform="translate(190, 140)">
+          <circle cx="0" cy="-5" r="5" stroke="#B45309" stroke-width="2" fill="none" />
+          <path d="M-12 0 L12 0 L8 12 H-8 Z" fill="url(#goldGrad)" />
+          <path d="M-10 12 H10 L15 35 L8 55 H-8 L-15 35 Z" fill="rgba(30, 58, 138, 0.9)" stroke="#FCD34D"
+            stroke-width="1.5" />
+          <circle cx="0" cy="35" r="8" fill="url(#lampGlow)" class="r-pulse" />
+          <path d="M-8 55 L0 65 L8 55" fill="none" stroke="#FCD34D" stroke-width="2" />
+          <line x1="0" y1="65" x2="0" y2="85" stroke="#DB2777" stroke-width="2" />
+        </g>
+      </g>
+
+      <!-- Sparkles -->
+      <g class="r-twinkle" style="animation-delay: 1.5s;">
+        <path transform="translate(50, 180) scale(0.4)"
+          d="M0 -10 L2 -2 L10 -2 L4 2 L6 10 L0 5 L-6 10 L-4 2 L-10 -2 L-2 -2 Z" fill="#FCD34D" />
+        <path transform="translate(200, 60) scale(0.3)"
+          d="M0 -10 L2 -2 L10 -2 L4 2 L6 10 L0 5 L-6 10 L-4 2 L-10 -2 L-2 -2 Z" fill="#FCD34D" />
+      </g>
+
+    </div>
+
+    <!-- Badge -->
+    <div class="r-badge-luxury">
+      رمضان كريم
+    </div>
+  </div>
+  <!-- RAMADAN OLD REMOVED -->
+  <div class="ramadan-luxury" style="display: none !important;">
+    <svg width="300" height="400" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Defs for Gradients -->
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="50%" stop-color="#B45309" />
+          <stop offset="100%" stop-color="#FCD34D" />
+        </linearGradient>
+        <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.9" />
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+        </radialGradient>
+        <filter id="dropShadow" x="-50" y="-50" width="200" height="200">
+          <feDropShadow dx="-2" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.3)" />
+        </filter>
+      </defs>
+
+      <!-- Main Hanging String -->
+      <g class="r-swing-1" style="transform-origin: 100px 0;">
+        <line x1="100" y1="0" x2="100" y2="80" stroke="url(#goldGrad)" stroke-width="2" />
+
+        <!-- Large Crescent Moon -->
+        <g transform="translate(100, 110)">
+          <!-- Moon Shape -->
+          <path d="M-20 -30 Q 30 -30 30 30 Q 30 90 -20 90 Q 10 90 10 30 Q 10 -30 -20 -30" fill="url(#goldGrad)"
+            stroke="#B45309" stroke-width="1" filter="url(#dropShadow)" />
+          <!-- Pattern Overlay (Clip) -->
+          <circle cx="0" cy="30" r="25" fill="#B45309" fill-opacity="0.1" />
+        </g>
+
+        <!-- Star hanging from Moon -->
+        <g class="r-swing-3" style="transform-origin: 100px 180px;">
+          <line x1="100" y1="180" x2="100" y2="210" stroke="#B45309" stroke-width="1" />
+          <path d="M100 210 L103 218 H112 L105 224 L108 232 L100 226 L92 232 L95 224 L88 218 H97 Z" fill="#FCD34D"
+            class="r-twinkle" />
+        </g>
+      </g>
+
+      <!-- Secondary String & Lantern -->
+      <g class="r-swing-2" style="transform-origin: 160px 0;">
+        <line x1="160" y1="0" x2="160" y2="120" stroke="url(#goldGrad)" stroke-width="1.5" />
+
+        <!-- Lantern -->
+        <g transform="translate(160, 120)">
+          <!-- Top Ring -->
+          <circle cx="0" cy="-5" r="6" stroke="#B45309" stroke-width="2" fill="none" />
+          <!-- Cap -->
+          <path d="M-15 0 L15 0 L10 15 H-10 Z" fill="url(#goldGrad)" />
+          <!-- Body -->
+          <path d="M-12 15 H12 L18 40 L10 60 H-10 L-18 40 Z" fill="rgba(30, 58, 138, 0.8)" stroke="#FCD34D"
+            stroke-width="1.5" />
+          <!-- Light inside -->
+          <circle cx="0" cy="40" r="10" fill="url(#lampGlow)" class="r-pulse" />
+          <!-- Bottom detail -->
+          <path d="M-10 60 L0 70 L10 60" fill="none" stroke="#FCD34D" stroke-width="2" />
+          <line x1="0" y1="70" x2="0" y2="90" stroke="#DB2777" stroke-width="2" /> <!-- Tassel -->
+        </g>
+      </g>
+
+      <!-- Sparkles -->
+      <g class="r-twinkle" style="animation-delay: 1s;">
+        <circle cx="50" cy="150" r="2" fill="#FEF08A" />
+        <circle cx="150" cy="50" r="1.5" fill="#FEF08A" />
+        <circle cx="180" cy="250" r="2" fill="#FEF08A" />
+      </g>
+
+    </svg>
+
+    <!-- Badge -->
+    <div class="r-badge-luxury">
+      رمضان كريم
+    </div>
+  </div>
   <!-- BG Effects -->
   <div class="mesh-bg"></div>
   <div class="aurora"><span></span><span></span><span></span></div>
@@ -2370,9 +2918,10 @@
     <div class="testimonials-track">
       <div class="t-card" id="t-card">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote" id="t-quote">"Dippo غيّر طريقة إدارتي لمحلي بالكامل. النظام سهل وسريع وشامل."</p>
-        <div class="t-author" id="t-author">أحمد بن علي</div>
-        <div class="t-role" id="t-role">صاحب محل تجارة جملة - سطيف</div>
+        <p class="t-quote" id="t-quote">" Dippo بدّلي الحانوت من الأرض للسما. كنت نخدم بالكارني، دروك كلش واضح وسهل
+          وسريع بزاف!"</p>
+        <div class="t-author" id="t-author">أحمد بوعلام</div>
+        <div class="t-role" id="t-role">صاحب محل غرو - سطيف</div>
       </div>
       <div class="t-dots">
         <div class="t-dot active" onclick="showTestimonial(0)"></div>
@@ -2518,9 +3067,9 @@
 
     // Testimonials
     const testimonials = [
-      { quote: '"Dippo غيّر طريقة إدارتي لمحلي بالكامل. النظام سهل وسريع وشامل."', author: "أحمد بن علي", role: "صاحب محل تجارة جملة - سطيف" },
-      { quote: '"بوت التيليجرام ميزة رائعة! أتابع مبيعاتي من أي مكان دون الحاجة للتواجد في المحل."', author: "محمد الأمين", role: "تاجر تجزئة - وهران" },
-      { quote: '"أنصح به كل تاجر يريد تنظيم عمله. نظام كشف الاحتيال وفّر لي الكثير من المال."', author: "ياسين حداد", role: "صاحب سلسلة محلات - الجزائر العاصمة" }
+      { quote: '"والله Dippo بدّلي الحانوت من الأرض للسما. كنت نخدم بالكارني، دروك كلش واضح وسهل وسريع بزاف!"', author: "أحمد علام", role: "صاحب محل غرو - سطيف" },
+      { quote: '"بوت التيليجرام حاجة خطيرة! نقعد في الدار ونشوف المبيعات والأرباح تاعي، مانحتاجش نروح للمحل. ميرسي Dippo!"', author: "محمد أمين", role: "تاجر تجزئة - وهران" },
+      { quote: '"ننصح بيه كل تاجر يحب ينظّم خدمته. نظام كشف الاحتيال وفّرلي بزاف دراهم، والفوترة ولات سهلة ياسر!"', author: "ياسين ", role: "صاحب محلات - الجزائر العاصمة" }
     ];
     let currentT = 0;
     function showTestimonial(i) {
