@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+n        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://dipposoft.github.io/</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://dipposoft.github.io/icon.png</image:loc>
+      <image:title>Dippo - نظام إدارة المبيعات والمخازن</image:title>
+      <image:caption>شعار Dippo - نظام ERP للتجار</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://dipposoft.github.io/dashboard.png</image:loc>
+      <image:title>لوحة تحكم Dippo GPS</image:title>
+      <image:caption>نظام تتبع التوزيع والمناديب</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://dipposoft.github.io/app.png</image:loc>
+      <image:title>تطبيق Dippo Android</image:title>
+      <image:caption>تطبيق المندوب للأندرويد</image:caption>
+    </image:image>
+  </url>
+</urlset>
