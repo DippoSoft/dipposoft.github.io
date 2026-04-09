@@ -1358,9 +1358,22 @@
     }
 
     /* ===== DOWNLOAD ===== */
-    .dl-container {
-      max-width: 800px;
+    #download {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2rem;
+      max-width: 1400px;
       margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .dl-container {
+      flex: 1;
+      min-width: 350px;
+      max-width: 600px;
+      margin: 0;
       text-align: center;
       background:
         radial-gradient(ellipse 100% 80% at 30% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
@@ -1556,8 +1569,10 @@
 
     /* ===== ANDROID APP DOWNLOAD ===== */
     .dl-android-container {
-      max-width: 800px;
-      margin: 2rem auto 0;
+      flex: 1;
+      min-width: 350px;
+      max-width: 600px;
+      margin: 0;
       text-align: center;
       background:
         radial-gradient(ellipse 100% 80% at 70% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
@@ -3612,6 +3627,12 @@
       .dl-android-container {
         padding: 1.75rem 1rem;
         border-radius: 20px;
+        min-width: 100%;
+      }
+
+      #download {
+        flex-direction: column;
+        gap: 1.5rem;
       }
 
       .section {
@@ -3797,7 +3818,10 @@
       </a>
       <ul class="nav-links">
         <li><a href="#features">الميزات</a></li>
+        <li><a href="#pos">نقطة البيع</a></li>
+        <li><a href="#invoices">الفواتير</a></li>
         <li><a href="#pricing">الأسعار</a></li>
+        <li><a href="#themes">الثيمات</a></li>
         <li><a href="#production">إدارة الإنتاج</a></li>
         <li><a href="#gps">Dippo GPS</a></li>
         <li><a href="#how">كيف يعمل</a></li>
@@ -3814,7 +3838,10 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
     <a href="#features" onclick="toggleMenu()">الميزات</a>
+    <a href="#pos" onclick="toggleMenu()">نقطة البيع</a>
+    <a href="#invoices" onclick="toggleMenu()">الفواتير</a>
     <a href="#pricing" onclick="toggleMenu()">الأسعار</a>
+    <a href="#themes" onclick="toggleMenu()">الثيمات</a>
     <a href="#production" onclick="toggleMenu()">إدارة الإنتاج</a>
     <a href="#gps" onclick="toggleMenu()">Dippo GPS</a>
     <a href="#how" onclick="toggleMenu()">كيف يعمل</a>
@@ -3903,6 +3930,65 @@
     </div>
   </section>
 
+  <!-- Themes & Languages Showcase -->
+  <section id="themes" style="background: var(--dark-bg); padding: 4rem 0; border-top: 1px solid var(--glass-border);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem; text-align: center;">
+      <span style="display: inline-block; padding: 0.5rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 9999px; font-size: 0.875rem; font-weight: 500; color: var(--primary); margin-bottom: 1.5rem;">
+        🎨 ثيمات متعددة
+      </span>
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        ثيمات متعددة ودعم بلغات متعددة
+      </h2>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; line-height: 1.8;">
+        اختر من بين 4 ثيمات احترافية تناسب ذوقك، واستخدم البرنامج باللغة التي تفضلها: العربية، الفرنسية، أو الإنجليزية
+      </p>
+
+      <!-- Languages -->
+      <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius);">
+          <span style="font-size: 1.5rem;">🇸🇦</span>
+          <span style="color: var(--text-primary); font-weight: 500;">العربية</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius);">
+          <span style="font-size: 1.5rem;">🇫🇷</span>
+          <span style="color: var(--text-primary); font-weight: 500;">Français</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius);">
+          <span style="font-size: 1.5rem;">🇬🇧</span>
+          <span style="color: var(--text-primary); font-weight: 500;">English</span>
+        </div>
+      </div>
+
+      <!-- Theme Images Grid -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto;">
+        <div style="position: relative; border-radius: 12px; overflow: hidden; border: 2px solid var(--glass-border); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.05)'" onmouseout="this.style.borderColor='var(--glass-border)';this.style.transform='scale(1)'">
+          <img src="t1.PNG" alt="الثيم الأول - Dark Modern" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); text-align: center;">
+            <span style="color: white; font-size: 0.875rem; font-weight: 500;">Dark Modern</span>
+          </div>
+        </div>
+        <div style="position: relative; border-radius: 12px; overflow: hidden; border: 2px solid var(--glass-border); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.05)'" onmouseout="this.style.borderColor='var(--glass-border)';this.style.transform='scale(1)'">
+          <img src="t2.PNG" alt="الثيم الثاني - Light Pro" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); text-align: center;">
+            <span style="color: white; font-size: 0.875rem; font-weight: 500;">Light Pro</span>
+          </div>
+        </div>
+        <div style="position: relative; border-radius: 12px; overflow: hidden; border: 2px solid var(--glass-border); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.05)'" onmouseout="this.style.borderColor='var(--glass-border)';this.style.transform='scale(1)'">
+          <img src="t3.PNG" alt="الثيم الثالث - Classic Blue" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); text-align: center;">
+            <span style="color: white; font-size: 0.875rem; font-weight: 500;">Classic Blue</span>
+          </div>
+        </div>
+        <div style="position: relative; border-radius: 12px; overflow: hidden; border: 2px solid var(--glass-border); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='scale(1.05)'" onmouseout="this.style.borderColor='var(--glass-border)';this.style.transform='scale(1)'">
+          <img src="t4.PNG" alt="الثيم الرابع - Ocean Theme" loading="lazy" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem; background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%); text-align: center;">
+            <span style="color: white; font-size: 0.875rem; font-weight: 500;">Ocean Theme</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="section" id="features">
     <div class="section-header">
@@ -3920,8 +4006,7 @@
       <div class="f-card anim">
         <div class="f-icon default">🛒</div>
         <h3 class="f-title">نقطة البيع (POS)</h3>
-        <p class="f-desc">كاشير احترافي مع ماسح الباركود، خصومات متعددة، ضريبة TVA التلقائية، الدفع الجزئي، والطباعة
-          الفورية.</p>
+        <p class="f-desc">كاشير احترافي مع ماسح الباركود، خصومات ذكية، ضريبة TVA التلقائية، والطباعة الفورية.</p>
       </div>
       <div class="f-card anim">
         <div class="f-icon default">🧾</div>
@@ -4004,6 +4089,177 @@
         <div class="f-icon default">⚙️</div>
         <h3 class="f-title">إعدادات شاملة</h3>
         <p class="f-desc">تخصيص بيانات الشركة، معدلات TVA، تنسيق الفواتير وخيارات الطباعة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POS / Cashier Section -->
+  <section class="section" id="pos" style="padding-bottom: 0;">
+    <div class="section-header">
+      <span class="section-tag">🛒 نقطة البيع المتطورة</span>
+      <h2 class="section-title">كاشير احترافي وسريع لإدارة مبيعاتك</h2>
+      <p class="section-sub">واجهة بيع سريعة مع ماسح الباركود، الخصومات الذكية، وضريبة TVA التلقائية</p>
+    </div>
+
+    <div class="gps-tabs" style="margin-bottom: 3rem;">
+      <div
+        style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; padding: 0 1rem;">
+        <div class="anim-fade-right anim">
+          <div
+            style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 2.5rem; height: 100%;">
+            <h3
+              style="font-size: 1.8rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #22d3ee 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              واجهة بيع سهلة وذكية</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+              نظام كاشير متكامل مصمم لتسريع عملية البيع وتقليل الأخطاء. يدعم ماسح الباركود للبحث الفوري عن المنتجات،
+              مع إمكانية تطبيق خصومات متعددة وضريبة TVA بشكل تلقائي.
+            </p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> بحث فوري بالباركود أو اسم المنتج
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> خصومات نسبية على كل منتج أو على إجمالي الفاتورة
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> دعم ضريبة TVA التلقائية على كل منتج
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> تعليق السلة واستئنافها لاحقاً
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> طباعة فورية للفاتورة وإشعار صوتي
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          style="position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+          <img src="pos.png" alt="واجهة الكاشير POS في Dippo - نظام نقطة البيع المتطور" loading="lazy"
+            style="width: 100%; display: block; filter: brightness(1.1);" />
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(0deg, var(--dark-card) 0%, transparent 40%);">
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="max-width: 1200px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 0 1rem;">
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #22d3ee, #06b6d4);">📷</div>
+          <h3 class="f-title">ماسح الباركود</h3>
+          <p class="f-desc">مسح سريع للباركود لإضافة المنتجات مباشرة إلى سلة المشتريات دون كتابة.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #10b981, #059669);">🏷️</div>
+          <h3 class="f-title">خصومات ذكية</h3>
+          <p class="f-desc">تطبيق خصومات نسبية على مستوى كل منتج أو على إجمالي الفاتورة.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">⏸️</div>
+          <h3 class="f-title">تعليق واستئناف السلة</h3>
+          <p class="f-desc">إمكانية تعليق عملية البيع الحالية واستئنافها لاحقاً دون فقدان البيانات.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">📜</div>
+          <h3 class="f-title">سجل المبيعات</h3>
+          <p class="f-desc">عرض وإعادة طباعة الفواتير السابقة مع إمكانية البحث والتصفية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Invoice Module Section -->
+  <section class="section" id="invoices" style="padding-bottom: 0;">
+    <div class="section-header">
+      <span class="section-tag">🧾 فواتير احترافية</span>
+      <h2 class="section-title">إنشاء وإدارة الفواتير باحترافية عالية</h2>
+      <p class="section-sub">واجهة متكاملة لإنشاء فواتير البيع والشراء مع حسابات تلقائية وخيارات متقدمة</p>
+    </div>
+
+    <div class="gps-tabs" style="margin-bottom: 3rem;">
+      <div
+        style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; padding: 0 1rem;">
+        <div
+          style="position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+          <img src="fa.png" alt="نافذة إنشاء الفاتورة - واجهة احترافية لإدارة الفواتير" loading="lazy"
+            style="width: 100%; display: block; filter: brightness(1.1);" />
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(0deg, var(--dark-card) 0%, transparent 40%);">
+          </div>
+        </div>
+        <div class="anim-fade-left anim">
+          <div
+            style="background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 2.5rem; height: 100%;">
+            <h3
+              style="font-size: 1.8rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              نافذة فاتورة متكاملة وذكية</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+              واجهة احترافية لإنشاء وإدارة فواتير البيع والشراء مع دعم الفواتير النهائية والمؤقتة (Proforma).
+              جدول متطور يدعم البحث بالباركود أو الاسم، مع حسابات تلقائية للضريبة والخصومات.
+            </p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> فواتير بيع وشراء مع دعم Proforma
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> بحث ذكي بالباركود أو الاسم أو الكود
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> تبديل فوري بين سعر الجملة والتجزئة
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> خصومات نسبية أو قيمة ثابتة مع حساب تلقائي
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> تحقق من المخزون قبل الحفظ
+              </li>
+              <li
+                style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--text-primary);">
+                <span style="color: var(--success);">✓</span> حفظ تلقائي للمسودات وإمكانية الطباعة
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="max-width: 1200px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 0 1rem;">
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">📄</div>
+          <h3 class="f-title">فواتير متعددة الأنواع</h3>
+          <p class="f-desc">فواتير بيع وشراء احترافية مع دعم الفواتير النهائية والمؤقتة Proforma.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">🔍</div>
+          <h3 class="f-title">بحث ذكي متعدد</h3>
+          <p class="f-desc">البحث بالباركود أو اسم المنتج أو الكود مع إكمال تلقائي للبيانات.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">💰</div>
+          <h3 class="f-title">تبديل أسعار فوري</h3>
+          <p class="f-desc">التبديل بضغطة زر بين سعر الجملة والتجزئة لكل العملاء.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #10b981, #059669);">🧮</div>
+          <h3 class="f-title">حسابات تلقائية</h3>
+          <p class="f-desc">حساب تلقائي للمجموع HT، TVA، TTC، والخصومات والرصيد الجديد.</p>
+        </div>
+        <div class="f-card anim" style="opacity: 1; transform: none;">
+          <div class="f-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🖨️</div>
+          <h3 class="f-title">طباعة متقدمة</h3>
+          <p class="f-desc">خيارات طباعة متعددة مع معاينة قبل الطباعة ودعم مختلف أحجام الورق.</p>
+        </div>
       </div>
     </div>
   </section>
