@@ -109,7 +109,7 @@
         "name": "هل Dippo مجاني؟",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "نعم، يوفر Dippo فترة تجريبية مجانية يمكنك استخدام اسم المستخدم 'user' وكلمة المرور 'user123' للوصول إلى جميع الميزات."
+          "text": "نعم! Dippo يوفر ترخيص مجاني لمدة 365 يوم (سنة كاملة) يتضمن جميع المميزات الأساسية والنسخ الاحتياطي السحابي. كما يتوفر ترخيص تجريبي لمدة 10 أيام مع كامل الميزات المتقدمة."
         }
       },
       {
@@ -126,6 +126,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "نعم، يوفر Dippo GPS نظاماً متطوراً لتتبع فريق التوزيع مع خرائط تفاعلية، تتبع حي للديون، وتطبيق مخصص للأندرويد للمناديب."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يدعم Dippo النسخ الاحتياطي السحابي؟",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "نعم! يدعم Dippo النسخ الاحتياطي السحابي عبر Google Drive. يمكنك مزامنة قاعدة البيانات تلقائياً مع حسابك على Google Drive للحفاظ على بياناتك آمنة واسترجاعها بسهولة من أي مكان."
         }
       },
       {
@@ -2109,12 +2117,24 @@
     }
 
     .pricing-grid {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
       padding: 0 1rem;
+    }
+
+    @media (max-width: 1200px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .pricing-card {
@@ -2147,6 +2167,15 @@
 
     .pricing-card-vip:hover {
       box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 35px rgba(251, 191, 36, 0.2);
+    }
+
+    .pricing-card-free {
+      border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.1);
+    }
+
+    .pricing-card-free:hover {
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 30px rgba(16, 185, 129, 0.2);
     }
 
     .pricing-badge {
@@ -3817,7 +3846,7 @@
         <span class="logo-text">Dippo</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#features">الميزات</a></li>
+        <li><a href="#features">✨ مميزات قوية</a></li>
         <li><a href="#pos">نقطة البيع</a></li>
         <li><a href="#invoices">الفواتير</a></li>
         <li><a href="#pricing">الأسعار</a></li>
@@ -3837,7 +3866,7 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#features" onclick="toggleMenu()">الميزات</a>
+    <a href="#features" onclick="toggleMenu()">✨ مميزات قوية</a>
     <a href="#pos" onclick="toggleMenu()">نقطة البيع</a>
     <a href="#invoices" onclick="toggleMenu()">الفواتير</a>
     <a href="#pricing" onclick="toggleMenu()">الأسعار</a>
@@ -4079,6 +4108,11 @@
         <div class="f-icon default">💾</div>
         <h3 class="f-title">النسخ الاحتياطي</h3>
         <p class="f-desc">نسخ احتياطي تلقائي، دعم SQLite وPostgreSQL، استرجاع بنقرة واحدة.</p>
+      </div>
+      <div class="f-card featured anim">
+        <div class="f-icon" style="background:linear-gradient(135deg,#4285f4,#34a853)">☁️</div>
+        <h3 class="f-title">النسخ الاحتياطي السحابي</h3>
+        <p class="f-desc">مزامنة تلقائية مع Google Drive، حماية بياناتك من الضياع، استرجاع سهل من أي مكان.</p>
       </div>
       <div class="f-card anim">
         <div class="f-icon default">🌐</div>
@@ -4528,7 +4562,7 @@
   <section class="stats-section" id="stats">
     <div class="stats-grid">
       <div class="stat-box anim">
-        <div class="stat-num" data-target="20">0</div>
+        <div class="stat-num" data-target="21">0</div>
         <div class="stat-lbl">ميزة أساسية +</div>
       </div>
       <div class="stat-box anim">
@@ -4592,19 +4626,52 @@
           </div>
           <p class="pricing-desc">جرّب جميع المميزات المتقدمة مجاناً لمدة محدودة</p>
           <ul class="pricing-features">
-            <li>تقارير متقدمة وتحليلات</li>
-            <li>مخازن متعددة</li>
-            <li>5 مستخدمين</li>
-            <li>تقارير مخصصة</li>
-            <li>نسخ احتياطي سحابي</li>
-            <li>API للربط</li>
-            <li>10,000 منتج</li>
-            <li>عملاء بدون حدود</li>
-            <li>5,000 فاتورة</li>
+            <li><strong>جميع المميزات المتقدمة</strong></li>
+            <li>🗺️ Dippo GPS وتتبع المناديب</li>
+            <li>📱 تطبيق Android للمناديب</li>
+            <li>☁️ نسخ احتياطي Google Drive</li>
+            <li>📊 تقارير متقدمة وتحليلات</li>
+            <li>🏪 مخازن متعددة</li>
+            <li>👥 5 مستخدمين</li>
+            <li>🔌 API للربط</li>
+            <li>📦 10,000 منتج</li>
+            <li>👨‍💼 عملاء بدون حدود</li>
+            <li>🧾 5,000 فاتورة</li>
           </ul>
           <a href="#download" class="pricing-btn"
             style="background: linear-gradient(135deg, #0ea5e9, #22d3ee); color: #fff;">
             حمّل النسخة التجريبية
+          </a>
+        </div>
+      </div>
+
+      <!-- Free License Card -->
+      <div class="pricing-card pricing-card-free anim">
+        <div class="pricing-badge" style="background: linear-gradient(135deg, #10b981, #34d399); color: #000; font-size: 0.8rem;">ترخيص مجاني 🎉</div>
+        <div class="pricing-header" style="background: linear-gradient(135deg, #10b981, #34d399);">
+          <div class="pricing-icon">🎁</div>
+          <h3 class="pricing-name">مجاني</h3>
+          <p class="pricing-subtitle">Free License</p>
+        </div>
+        <div class="pricing-body">
+          <div class="pricing-price"
+            style="background: linear-gradient(135deg, #10b981, #34d399); -webkit-background-clip: text; background-clip: text;">
+            <span>مجاني لمدة</span>
+            <br>365 يوم<span>كامل المميزات</span>
+          </div>
+          <p class="pricing-desc">استخدم Dippo مجاناً لمدة سنة كاملة مع جميع المميزات الأساسية</p>
+          <ul class="pricing-features">
+            <li><strong>جميع المميزات الأساسية</strong></li>
+            <li>☁️ نسخ احتياطي Google Drive</li>
+            <li>🏪 مخازن متعددة</li>
+            <li>📦 80 منتج</li>
+            <li>👨‍💼 عملاء بدون حدود</li>
+            <li>🧾 500 فاتورة شهرياً</li>
+            <li>👥 مستخدم واحد</li>
+          </ul>
+          <a href="#download" class="pricing-btn"
+            style="background: linear-gradient(135deg, #10b981, #34d399); color: #fff;">
+            احصل على الترخيص المجاني
           </a>
         </div>
       </div>
@@ -4660,9 +4727,10 @@
             <li>🗺️ نظام GPS للمناديب وإدارة التوزيع</li>
             <li>🗺️ قاعدة بيانات جغرافية للزبائن</li>
             <li>🗺️ إدارة التوزيع عبر سجل التوقف وتغطية القطاع</li>
-            <li>🗺️ نظام GPS محلي اتعقب المركبات والهواتف</li>
-            <li> تطبيق أندرويد للموزع لإدراج الزبائن والديون</li>
-            <li> النسخ الاحتياطي تلقائي</li>
+            <li>🗺️ نظام GPS محلي لتتبع المركبات والهواتف</li>
+            <li>📱 تطبيق Android للموزع لإدراج الزبائن والديون</li>
+            <li>💾 النسخ الاحتياطي التلقائي المحلي</li>
+            <li>☁️ نسخ احتياطي Google Drive سحابي</li>
             <li>🔌 API لوحة تحكم عن بعد</li>
             <li>👥 مستخدمين غير محدود</li>
             <li>📦 منتجات غير محدودة</li>
