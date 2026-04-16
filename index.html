@@ -106,14 +106,6 @@
       },
       {
         "@type": "Question",
-        "name": "هل Dippo مجاني؟",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "نعم! Dippo يوفر ترخيص مجاني لمدة 365 يوم (سنة كاملة) يتضمن جميع المميزات الأساسية والنسخ الاحتياطي السحابي. كما يتوفر ترخيص تجريبي لمدة 10 أيام مع كامل الميزات المتقدمة."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "ما هي متطلبات تشغيل Dippo؟",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -1667,43 +1659,6 @@
       height: 22px;
     }
 
-    .trial-notice {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(251, 191, 36, .12);
-      border: 1px solid rgba(251, 191, 36, .25);
-      color: var(--warning);
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: .9rem;
-      margin-top: 1.2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .trial-notice svg {
-      width: 18px;
-      height: 18px;
-      color: var(--warning);
-    }
-
-    .trial-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(52, 211, 153, .12);
-      color: var(--success);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: .85rem;
-      font-weight: 600;
-      margin-top: .8rem;
-      position: relative;
-      z-index: 1;
-      border: 1px solid rgba(52, 211, 153, .15);
-    }
-
     .dl-android-checks {
       display: flex;
       justify-content: center;
@@ -2120,20 +2075,23 @@
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
       padding: 0 1rem;
+      justify-content: center;
     }
 
     @media (max-width: 1200px) {
       .pricing-grid {
         grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
       }
     }
 
     @media (max-width: 768px) {
       .pricing-grid {
         grid-template-columns: 1fr;
+        justify-content: center;
       }
     }
 
@@ -2156,8 +2114,20 @@
       box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);
     }
 
-    .pricing-card-trial:hover {
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35), 0 0 30px rgba(34, 211, 238, 0.2);
+.tab-btn.active {
+  background: var(--gradient-primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
     }
 
     .pricing-card-vip {
@@ -3940,7 +3910,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            تحميل مجاني
+            تحميل
           </a>
           <a href="#features" class="btn btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -4538,7 +4508,7 @@
         <div class="step-num">1</div>
         <div class="step-info">
           <h3>حمّل وثبّت البرنامج</h3>
-          <p>تحميل مجاني وتثبيت فوري على Windows. لا حاجة لخبرة تقنية.</p>
+          <p>تحميل وتثبيت فوري على Windows. لا حاجة لخبرة تقنية.</p>
         </div>
       </div>
       <div class="step-item anim">
@@ -4611,7 +4581,7 @@
     <div class="pricing-grid">
       <!-- Trial Card -->
       <div class="pricing-card pricing-card-trial anim">
-        <div class="pricing-badge" style="background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #000;">مجاني 🎁
+        <div class="pricing-badge" style="background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #000;">تجريبي 🎁
         </div>
         <div class="pricing-header" style="background: linear-gradient(135deg, #0ea5e9, #22d3ee);">
           <div class="pricing-icon">🎯</div>
@@ -4621,10 +4591,10 @@
         <div class="pricing-body">
           <div class="pricing-price"
             style="background: linear-gradient(135deg, #0ea5e9, #22d3ee); -webkit-background-clip: text; background-clip: text;">
-            <span>مجاني</span>
+            <span>تجريبي</span>
             <br>0 د.ج
           </div>
-          <p class="pricing-desc">جرّب جميع المميزات المتقدمة مجاناً لمدة محدودة</p>
+          <p class="pricing-desc">جرّب جميع المميزات المتقدمة لمدة محدودة</p>
           <ul class="pricing-features">
             <li><strong>جميع المميزات المتقدمة</strong></li>
             <li>🗺️ Dippo GPS وتتبع المناديب</li>
@@ -4641,37 +4611,6 @@
           <a href="#download" class="pricing-btn"
             style="background: linear-gradient(135deg, #0ea5e9, #22d3ee); color: #fff;">
             حمّل النسخة التجريبية
-          </a>
-        </div>
-      </div>
-
-      <!-- Free License Card -->
-      <div class="pricing-card pricing-card-free anim">
-        <div class="pricing-badge" style="background: linear-gradient(135deg, #10b981, #34d399); color: #000; font-size: 0.8rem;">ترخيص مجاني 🎉</div>
-        <div class="pricing-header" style="background: linear-gradient(135deg, #10b981, #34d399);">
-          <div class="pricing-icon">🎁</div>
-          <h3 class="pricing-name">مجاني</h3>
-          <p class="pricing-subtitle">Free License</p>
-        </div>
-        <div class="pricing-body">
-          <div class="pricing-price"
-            style="background: linear-gradient(135deg, #10b981, #34d399); -webkit-background-clip: text; background-clip: text;">
-            <span>مجاني لمدة</span>
-            <br>365 يوم<span>كامل المميزات</span>
-          </div>
-          <p class="pricing-desc">استخدم Dippo مجاناً لمدة سنة كاملة مع جميع المميزات الأساسية</p>
-          <ul class="pricing-features">
-            <li><strong>جميع المميزات الأساسية</strong></li>
-            <li>☁️ نسخ احتياطي Google Drive</li>
-            <li>🏪 مخازن متعددة</li>
-            <li>📦 80 منتج</li>
-            <li>👨‍💼 عملاء بدون حدود</li>
-            <li>🧾 500 فاتورة شهرياً</li>
-            <li>👥 مستخدم واحد</li>
-          </ul>
-          <a href="#download" class="pricing-btn"
-            style="background: linear-gradient(135deg, #10b981, #34d399); color: #fff;">
-            احصل على الترخيص المجاني
           </a>
         </div>
       </div>
@@ -4767,7 +4706,7 @@
         <div class="dl-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg><span>تجربة مجانية</span></div>
+          </svg><span>تجربة</span></div>
       </div>
       <a href="https://bit.ly/3PUFm7f" class="btn-dl" id="dl-btn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -4830,18 +4769,6 @@
         </svg>
         تحميل تطبيق Dippo GPS
       </a>
-      <div class="trial-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        الفترة التجريبية
-      </div>
-      <div class="trial-notice">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
         يمكنك إستخدام إسم المستخدم <strong>user</strong> وكلمة السر <strong>user123</strong>
       </div>
     </div>
