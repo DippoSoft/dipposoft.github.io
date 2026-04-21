@@ -84,8 +84,8 @@
     },
     "datePublished": "2024-01-01",
     "dateModified": "2026-04-01",
-    "softwareVersion": "3.2",
-    "downloadUrl": "https://bit.ly/4cByzXP",
+    "softwareVersion": "3.3",
+    "downloadUrl": "https://bit.ly/Dippo33",
     "screenshot": "https://dipposoft.github.io/dashboard.png"
   }
   </script>
@@ -1565,6 +1565,110 @@
       margin-top: 1.2rem;
       position: relative;
       z-index: 1;
+    }
+
+    /* ===== DOWNLOAD TYPE SELECTOR ===== */
+    .dl-type-selector {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      margin-top: .5rem;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .dl-type-option {
+      flex: 1;
+      min-width: 160px;
+      max-width: 240px;
+      background: var(--glass-bg);
+      border: 2px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1rem .8rem;
+      cursor: pointer;
+      transition: all .35s cubic-bezier(.16, 1, .3, 1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dl-type-option::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity .35s;
+    }
+
+    .dl-type-option:hover {
+      border-color: rgba(34, 211, 238, .35);
+      transform: translateY(-3px);
+    }
+
+    .dl-type-option.active {
+      border-color: var(--primary);
+      box-shadow: 0 8px 30px rgba(34, 211, 238, .25);
+    }
+
+    .dl-type-option.active::before {
+      opacity: .08;
+    }
+
+    .dl-type-icon {
+      font-size: 2rem;
+      margin-bottom: .5rem;
+      display: block;
+    }
+
+    .dl-type-name {
+      font-weight: 700;
+      font-size: .95rem;
+      margin-bottom: .3rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dl-type-desc {
+      font-size: .78rem;
+      color: var(--text-secondary);
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dl-type-option.active .dl-type-name {
+      color: var(--primary-light);
+    }
+
+    .dl-type-check {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(.5);
+      transition: all .3s;
+    }
+
+    .dl-type-option.active .dl-type-check {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .dl-type-check svg {
+      width: 14px;
+      height: 14px;
+      color: #fff;
     }
 
     /* ===== ANDROID APP DOWNLOAD ===== */
@@ -3899,7 +4003,7 @@
       </div>
 
       <div class="hero-text">
-        <div class="hero-badge"><span class="dot"></span>الإصدار3.2 متوفر الآن</div>
+        <div class="hero-badge"><span class="dot"></span>الإصدار3.3 متوفر الآن</div>
         <h1>نظام <span class="grad" data-text="إدارة المبيعات والمخازن">إدارة المبيعات والمخازن</span><br />الذكي
           والمتكامل</h1>
         <p class="hero-desc">Dippo هو الحل الأمثل لتجار الجملة والتجزئة. من إدارة المخزون إلى نقطة البيع، من الفواتير
@@ -4708,14 +4812,14 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg><span>تجربة</span></div>
       </div>
-      <a href="https://bit.ly/4cByzXP" class="btn-dl" id="dl-btn">
+      <a href="https://bit.ly/Dippo33" class="btn-dl" id="dl-btn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         تحميل Dippo الآن
       </a>
-      <div class="ver-tag">الإصدار 3.2 • © 2026-2027</div>
+      <div class="ver-tag">الإصدار 3.3 • © 2026-2027</div>
       <!-- Compatibility Warning -->
       <div class="compat-warning anim">
         <div class="compat-card">
@@ -4777,16 +4881,47 @@
   <!-- Modal -->
   <div class="modal-overlay" id="login-modal">
     <div class="modal-box">
-      <div class="modal-icon">🔑</div>
-      <h3 class="modal-title">معلومات الدخول</h3>
-      <p class="modal-msg">في نافذة تسجيل الدخول لبرنامج Dippo استخدم البيانات التالية:</p>
-      <div class="cred-card">
-        <div style="text-align:center"><span class="cred-label">إسم المستخدم</span><span class="cred-val">admin</span>
+      <!-- Step 1: Credentials -->
+      <div id="modal-step-cred">
+        <div class="modal-icon">🔑</div>
+        <h3 class="modal-title">معلومات الدخول</h3>
+        <p class="modal-msg">في نافذة تسجيل الدخول لبرنامج Dippo استخدم البيانات التالية:</p>
+        <div class="cred-card">
+          <div style="text-align:center"><span class="cred-label">إسم المستخدم</span><span class="cred-val">admin</span>
+          </div>
+          <div style="text-align:center"><span class="cred-label">كلمة السر</span><span class="cred-val">admin123</span>
+          </div>
         </div>
-        <div style="text-align:center"><span class="cred-label">كلمة السر</span><span class="cred-val">admin123</span>
-        </div>
+        <button class="btn-modal" onclick="showDlTypeStep()">حسناً، فهمت</button>
       </div>
-      <button class="btn-modal" onclick="closeModal()">حسناً، فهمت</button>
+      <!-- Step 2: Download Type -->
+      <div id="modal-step-dl" style="display:none">
+        <div class="modal-icon" style="background: linear-gradient(135deg, #22d3ee 0%, #34d399 100%);">⬇️</div>
+        <h3 class="modal-title" style="background: linear-gradient(135deg, #22d3ee 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">اختر نوع التحميل</h3>
+        <p class="modal-msg">اختر الطريقة المناسبة لتحميل البرنامج</p>
+        <div class="dl-type-selector">
+          <div class="dl-type-option active" data-type="installer" data-href="https://bit.ly/Dippo33" onclick="selectDlType(this)">
+            <div class="dl-type-check">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="dl-type-icon">📦</span>
+            <span class="dl-type-name">مثبت Windows</span>
+            <span class="dl-type-desc">تثبيت تلقائي على الجهاز</span>
+          </div>
+          <div class="dl-type-option" data-type="zip" data-href="https://bit.ly/Dippozip" onclick="selectDlType(this)">
+            <div class="dl-type-check">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="dl-type-icon">🗜️</span>
+            <span class="dl-type-name">نسخة مضغوطة ZIP</span>
+          </div>
+        </div>
+        <button class="btn-modal" onclick="startDownload()">⬇️ تحميل الآن</button>
+      </div>
     </div>
   </div>
 
@@ -4905,11 +5040,38 @@
 
     // Download modal
     const dlBtn = document.getElementById("dl-btn"), modal = document.getElementById("login-modal");
-    dlBtn.addEventListener("click", e => { e.preventDefault(); modal.style.display = "flex" });
-    function closeModal() {
-      modal.style.display = "none";
-      const a = document.createElement("a"); a.href = dlBtn.getAttribute("href"); a.download = ""; a.target = "_blank"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    let selectedDlHref = "https://bit.ly/Dippo33";
+
+    dlBtn.addEventListener("click", e => {
+      e.preventDefault();
+      // Reset to step 1
+      document.getElementById("modal-step-cred").style.display = "";
+      document.getElementById("modal-step-dl").style.display = "none";
+      modal.style.display = "flex";
+    });
+
+    function showDlTypeStep() {
+      document.getElementById("modal-step-cred").style.display = "none";
+      document.getElementById("modal-step-dl").style.display = "";
     }
+
+    function selectDlType(el) {
+      document.querySelectorAll('.dl-type-option').forEach(o => o.classList.remove('active'));
+      el.classList.add('active');
+      selectedDlHref = el.dataset.href;
+    }
+
+    function startDownload() {
+      modal.style.display = "none";
+      const a = document.createElement("a");
+      a.href = selectedDlHref;
+      a.download = "";
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
     modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none" });
 
     // Android Download modal
